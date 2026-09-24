@@ -1,0 +1,224 @@
+/* ==========================================================================
+   ¡Buenas! Taquería · módulo: abertura (loader)
+   Um monte de 3 cartas de lotería que embaralha, abre em leque e vira,
+   o grito "¡BUENAS!" batendo na tela e a cortina de papel recortado subindo.
+
+   Estado inicial é o mais importante deste arquivo:
+   - sem JS  -> .loader nunca sai de display:none (o site já está pintado).
+   - com JS mas sem movimento (sem GSAP ou prefers-reduced-motion) -> o main.js
+     não põe .motion-ok no <html>, então continua display:none.
+   - com movimento mas segunda visita da sessão -> o módulo põe .no-intro no
+     <html> de forma síncrona, antes de qualquer pintura.
+   Só quando as duas condições batem é que o loader existe na tela, e mesmo
+   assim ele fica invisível até o JS montar as cartas (.is-ready).
+
+   z-index 94: acima do header (80) e do dock (75), abaixo do .grain (95), pra
+   a abertura usar exatamente o mesmo papel granulado do site, sem duplicar a
+   textura e sem "pulo" de grão na hora da revelação.
+   ========================================================================== */
+
+.loader { display: none; }
+html.motion-ok:not(.no-intro) .loader { display: flex; }
+
+.loader {
+  --scallop: 16px;                                  /* altura da borda recortada */
+  position: fixed;
+  inset: 0 0 calc(var(--scallop) * -1) 0;           /* 16px a mais, fora da tela */
+  z-index: 94;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(18px, 4vh, 54px);
+  padding:
+    calc(var(--header-h) * .5)
+    var(--gutter)
+    calc(var(--header-h) * .5 + var(--scallop));    /* devolve os 16px extras */
+  background: var(--papel);
+  overflow: hidden;
+  visibility: hidden;
+  pointer-events: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.loader.is-ready { visibility: visible; pointer-events: auto; }
+
+/* Saída: a cortina sobe com a borda de papel recortado (mesma gramática do
+   .scallop-top). A máscara é estática, só o transform anima — compositing puro.
+   Os dois níveis da máscara são disjuntos: a tira de bolinhas ocupa os 16px que
+   já estavam fora da tela e o bloco sólido cobre exatamente o viewport. */
+.loader.is-leaving {
+  will-change: transform;
+  -webkit-mask-image:
+    radial-gradient(circle at 50% 0, #000 13.2px, transparent 14.2px),
+    linear-gradient(#000, #000);
+  -webkit-mask-size: 28px var(--scallop), 100% calc(100% - var(--scallop));
+  -webkit-mask-position: 0 100%, 0 0;
+  -webkit-mask-repeat: repeat-x, no-repeat;
+  mask-image:
+    radial-gradient(circle at 50% 0, #000 13.2px, transparent 14.2px),
+    linear-gradient(#000, #000);
+  mask-size: 28px var(--scallop), 100% calc(100% - var(--scallop));
+  mask-position: 0 100%, 0 0;
+  mask-repeat: repeat-x, no-repeat;
+}
+
+/* ---------- o monte ---------- */
+.loader__deck {
+  position: relative;
+  width: 100%;
+  max-width: calc(var(--maxw) * .62);
+  height: clamp(176px, 32vh, 312px);
+  perspective: 1400px;
+}
+
+.loader__card {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: clamp(96px, 19vw, 176px);
+  aspect-ratio: 2 / 3;
+  transform-style: preserve-3d;
+}
+
+/* will-change só enquanto a abertura está de pé; o nó inteiro é removido no fim. */
+.loader.is-ready .loader__card { will-change: transform; }
+
+/* verso da carta (o monte começa de costas) */
+.loader__card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: var(--r-card);
+  transform: rotateY(180deg) translateZ(.1px);
+  backface-visibility: hidden;
+  background:
+    radial-gradient(circle at 50% 50%, var(--maiz) 0 13.5%, transparent 14.1%),
+    repeating-linear-gradient(45deg, color-mix(in srgb, var(--papel-3) 14%, transparent) 0 7px, transparent 7px 14px),
+    var(--cobalto);
+  box-shadow:
+    var(--shadow-card),
+    inset 0 0 0 7px var(--cobalto),
+    inset 0 0 0 calc(7px + var(--line)) var(--papel-3);
+}
+
+/* frente: mesma anatomia do .lcard do main.css (papel + moldura + nome) */
+.loader__face {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--r-card);
+  background: var(--papel-3);
+  padding: 7px;
+  box-shadow: var(--shadow-card);
+  backface-visibility: hidden;
+  transform: translateZ(.1px);
+}
+.loader__frame {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  height: 100%;
+  border: var(--line) solid var(--tinta);
+  border-radius: var(--r-frame);
+  background: var(--papel-3);
+  overflow: hidden;
+}
+.loader__num {
+  display: flex;
+  align-items: baseline;
+  gap: 2px;
+  padding: 5px 7px 0;
+  font-family: var(--slab);
+  font-size: clamp(7px, .72vw, 10px);
+  line-height: 1;
+}
+.loader__num b { font-weight: 400; font-size: 2.1em; }
+.loader__art { display: grid; place-items: center; min-height: 0; padding: 3px 8px 6px; }
+.loader__art img { width: 100%; height: 100%; object-fit: contain; }
+.loader__name {
+  border-top: var(--line) solid var(--tinta);
+  text-align: center;
+  padding: 4px 3px 5px;
+  font-family: var(--display);
+  font-variation-settings: "wdth" 64, "wght" 900;
+  font-weight: 900;
+  font-size: clamp(11px, 1.15vw, 17px);
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: .01em;
+  white-space: nowrap;
+}
+
+/* ---------- o grito ---------- */
+.loader__word {
+  --w: var(--w-shout);
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: .02em;
+  font-family: var(--display);
+  font-weight: 900;
+  font-size: clamp(50px, 12.5vw, 160px);
+  line-height: .82;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transform-origin: 50% 78%;
+  opacity: 0;
+  user-select: none;
+}
+.loader__word .excl { height: .79em; width: .35em; margin-bottom: .035em; }
+.loader__word > span {
+  position: relative;
+  font-variation-settings: "wdth" var(--w), "wght" 900;
+  background: var(--fountain);
+  -webkit-background-clip: text;
+          background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  padding-bottom: .04em;
+}
+/* sombra deslocada em tinta, igual ao .wm__word do hero */
+.loader__word > span::before {
+  content: "BUENAS";
+  position: absolute;
+  left: .045em;
+  top: .045em;
+  z-index: -1;
+  color: var(--tinta);
+  -webkit-text-fill-color: var(--tinta);
+  background: none;
+}
+
+/* ---------- feijões soltos ---------- */
+.loader__beans {
+  position: absolute;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+.loader__bean {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: clamp(15px, 1.9vw, 26px);
+  opacity: 0;
+}
+.loader__bean svg { width: 100%; height: auto; overflow: visible; }
+.loader__bean use { fill: var(--bean, var(--rosa)); }
+.loader__bean .sh { fill: var(--tinta); }
+.loader__bean[data-tint="rosa"]    { --bean: var(--rosa); }
+.loader__bean[data-tint="maiz"]    { --bean: var(--maiz); }
+.loader__bean[data-tint="verde"]   { --bean: var(--verde); }
+.loader__bean[data-tint="cempa"]   { --bean: var(--cempa); }
+.loader__bean[data-tint="cobalto"] { --bean: var(--cobalto); }
+
+/* ---------- telas estreitas ---------- */
+@media (max-width: 560px) {
+  .loader__deck { height: clamp(168px, 30vh, 260px); }
+  .loader { gap: clamp(14px, 3vh, 30px); }
+}
+
+/* ---------- acessibilidade: cinto e suspensório ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .loader,
+  html.motion-ok .loader { display: none !important; }
+}

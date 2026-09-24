@@ -1,0 +1,168 @@
+/* ==========================================================================
+   ¡Buenas! Taquería · módulo: O BARALHO
+   Refina o 3D que já vem do main.css, dá acabamento de carta impressa e
+   prepara os ganchos que o deck.js usa. Nada aqui muda a ordem de leitura.
+   Sem JS: as cartas ficam no grid, levemente tortas, viráveis no hover.
+   ========================================================================== */
+
+/* Propriedades tipadas: deixam o GSAP e o :hover interpolarem com segurança.
+   Navegador antigo ignora o bloco e cai nos defaults declarados logo abaixo. */
+@property --lift { syntax: "<number>"; inherits: true; initial-value: 0; }
+@property --hov  { syntax: "<number>"; inherits: true; initial-value: 0; }
+@property --sx   { syntax: "<length>"; inherits: true; initial-value: 0px; }
+
+/* --------------------------------------------------------------- palco */
+/* position: relative é o que ancora a medição do monte no deck.js
+   (offsetLeft/offsetTop das cartas passam a ser relativos ao palco). */
+.deck__stage {
+  position: relative;
+  --lift: 0;
+}
+
+/* foco: o outline global é cobalto e some no fundo cobalto desta seção */
+.deck :focus-visible { outline-color: var(--maiz); outline-offset: 4px; }
+
+/* --------------------------------------------------- inclinação de repouso
+   Nenhuma carta perfeitamente reta. --sx é a fuga da sombra, pareada com o
+   ângulo (sombra acompanha a inclinação). O deck.js lê --rest e reusa como
+   valor final da distribuição, então os dois nunca brigam. */
+.deck__stage > .lcard--deck {
+  --hov: 0;
+  --sx: 0px;
+  --d: calc(var(--lift, 0) + var(--hov));
+  transform: rotate(var(--rest, 0deg));
+}
+.deck__stage > .lcard--deck:nth-child(1) { --rest: -2.2deg; --sx: -2px;   --zp: 9; }
+.deck__stage > .lcard--deck:nth-child(2) { --rest:  1.6deg; --sx:  1.4px; --zp: 8; }
+.deck__stage > .lcard--deck:nth-child(3) { --rest: -1.1deg; --sx: -1px;   --zp: 7; }
+.deck__stage > .lcard--deck:nth-child(4) { --rest:  2.4deg; --sx:  2.2px; --zp: 6; }
+.deck__stage > .lcard--deck:nth-child(5) { --rest:  1.3deg; --sx:  1.2px; --zp: 5; }
+.deck__stage > .lcard--deck:nth-child(6) { --rest: -2.6deg; --sx: -2.3px; --zp: 4; }
+.deck__stage > .lcard--deck:nth-child(7) { --rest:  2deg;   --sx:  1.8px; --zp: 3; }
+.deck__stage > .lcard--deck:nth-child(8) { --rest: -1.5deg; --sx: -1.4px; --zp: 2; }
+
+/* ------------------------------------------------------- sombra da carta
+   Três camadas: contato duro, sombra média puxada pro azul da seção
+   (var --cobalto-deep) e sombra longa quente (var --tinta).
+   --sx desloca lateralmente conforme o ângulo; --d aprofunda quando a carta
+   está no ar (distribuição) ou levantada (hover). */
+.lcard--deck .lcard__front,
+.lcard--deck .lcard__back {
+  box-shadow:
+    0 1px 0 rgba(29, 21, 17, .22),
+    calc(var(--sx, 0px) * .9) calc(10px + var(--d, 0) * 14px) calc(16px + var(--d, 0) * 16px) -10px rgba(21, 48, 127, .42),
+    calc(var(--sx, 0px) * 1.5) calc(22px + var(--d, 0) * 24px) calc(34px + var(--d, 0) * 22px) -22px rgba(29, 21, 17, .55);
+}
+
+/* ------------------------------------------------- estado de distribuição
+   .is-deal  = o deck.js assumiu o controle (cartas podem estar no monte)
+   .is-live  = o ScrollTrigger está na faixa ativa, ou seja, anima AGORA
+   .is-dealt = as cartas assentaram
+   will-change só existe na janela .is-live: nada de camada promovida
+   esperando o usuário chegar na seção. */
+.deck__stage.is-deal:not(.is-dealt) > .lcard--deck { z-index: var(--zp, 1); }
+.deck__stage.is-deal.is-live:not(.is-dealt) > .lcard--deck { will-change: transform; }
+/* enquanto o monte se abre, o hover não pode virar carta em voo */
+.deck__stage.is-deal:not(.is-dealt) > .lcard--deck:not(.is-flipped):hover .lcard__inner {
+  transform: translate3d(0, 0, 0) rotateY(0deg);
+}
+
+/* ------------------------------------------------------------- virar
+   O main.css já dá o preserve-3d e o rotateY. Aqui a virada ganha o
+   deslocamento de levantar e o timing fica no token --ease-back. */
+.lcard--deck .lcard__inner {
+  transform: translate3d(0, 0, 0) rotateY(0deg);
+  transition: transform .78s var(--ease-back);
+}
+.lcard--deck.is-flipped .lcard__inner { transform: translate3d(0, 0, 0) rotateY(180deg); }
+
+@media (hover: hover) and (pointer: fine) {
+  .lcard--deck { transition: --hov .3s var(--ease); }
+  .lcard--deck:hover { z-index: 6; --hov: .8; }
+  .lcard--deck:hover .lcard__inner,
+  .lcard--deck.is-flipped:hover .lcard__inner {
+    transform: translate3d(0, -10px, 0) rotateY(180deg);
+    will-change: transform;
+  }
+  /* com a carta virada no hover, o alvo de clique encolhe pro topo e libera
+     o preço e o botão Order embaixo (que fica por baixo do .lcard__flip) */
+  .lcard--deck:hover .lcard__flip { inset: 0 0 auto 0; height: 52%; }
+}
+
+/* ------------------------------------------------- microinteração do Order
+   Mesma gramática dos .btn do site: sombra dura que a carta "afunda". */
+.lcard__order {
+  transition: transform .22s var(--ease-back), box-shadow .22s var(--ease);
+}
+.lcard__order svg { transition: transform .26s var(--ease-back); }
+@media (hover: hover) and (pointer: fine) {
+  .lcard__order:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 0 3px var(--back), 0 5px 0 var(--back-ink);
+  }
+  .lcard__order:hover svg { transform: translateX(3px); }
+}
+.lcard__order:active {
+  transform: translateY(2px);
+  box-shadow: 0 0 0 3px var(--back), 0 1px 0 var(--back-ink);
+}
+
+/* ------------------------------------------------------- a carta campeã
+   El Pastor, No. 01: forro dourado no quadro, tarja de nome em maíz e um
+   brilho de foil que passa devagar. Tudo na FRENTE da carta, dentro do
+   quadro impresso: nada flutua sobre a foto do prato. */
+.lcard--deck.is-champ .lcard__front .lcard__frame {
+  position: relative;
+  box-shadow: inset 0 0 0 2px var(--maiz);
+}
+.lcard--deck.is-champ .lcard__front .lcard__name {
+  background: var(--maiz);
+}
+
+/* o brilho só existe quando a carta está na tela (deck.js liga .is-lit) */
+.lcard--deck.is-champ.is-lit .lcard__front .lcard__frame::after {
+  content: "";
+  position: absolute; inset: -20% -60%;
+  background: linear-gradient(104deg,
+    transparent 42%,
+    rgba(251, 245, 234, .5) 50%,
+    rgba(245, 205, 58, .38) 56%,
+    transparent 64%);
+  transform: translateX(-72%);
+  animation: champFoil 5.4s var(--ease) infinite;
+  pointer-events: none;
+}
+@keyframes champFoil {
+  0%, 10%  { transform: translateX(-72%); }
+  48%, 100% { transform: translateX(72%); }
+}
+
+/* --------------------------------------------------------------- celular
+   O grid de 2 colunas do main.css continua: o baralho tem que parecer uma
+   TABLA, não um carrossel. Aqui só sobra espaço pra leitura do verso. */
+@media (max-width: 760px) {
+  .lcard--deck { touch-action: manipulation; }
+  .lcard__flip { -webkit-tap-highlight-color: transparent; }
+  .lcard--deck .lcard__dish { padding: 9px 8px 0; }
+  .lcard--deck .lcard__dish img { width: 44%; }
+  .lcard--deck .lcard__info { padding: 8px 9px 10px; gap: 2px; }
+  .lcard--deck .lcard__desc { font-size: 11px; line-height: 1.32; }
+  .lcard--deck .lcard__row { margin-top: 2px; }
+  .lcard--deck .lcard__row .price { font-size: 15px; }
+  .lcard--deck .lcard__order { padding: 7px 10px; font-size: 12px; }
+  .lcard--deck .lcard__order svg { width: 12px; height: 12px; }
+}
+/* telas bem estreitas: o texto para em 4 linhas em vez de brigar com a moldura */
+@media (max-width: 420px) {
+  .lcard--deck .lcard__desc {
+    display: -webkit-box; -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4; line-clamp: 4; overflow: hidden;
+  }
+}
+
+/* -------------------------------------------------------- menos movimento
+   O main.css já zera durações. Aqui a garantia de que nada fica no ar. */
+@media (prefers-reduced-motion: reduce) {
+  .deck__stage > .lcard--deck { will-change: auto; }
+  .lcard--deck.is-champ.is-lit .lcard__front .lcard__frame::after { display: none; }
+}

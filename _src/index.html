@@ -1,0 +1,592 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>¡Buenas! Taquería · Tacos worth shouting about · Los Angeles</title>
+<meta name="description" content="Hand-pressed tortillas, a trompo that spins 14 hours a day and salsas with a temper. ¡Buenas! Taquería in Highland Park and Boyle Heights, Los Angeles.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#F4EAD8">
+<link rel="icon" href="assets/img/ui/favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="¡Buenas! Taquería · Tacos worth shouting about">
+<meta property="og:description" content="Hand-pressed tortillas, a 14-hour trompo and salsas with a temper. Highland Park & Boyle Heights, Los Angeles.">
+<meta property="og:image" content="assets/img/ui/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/anybody-var-latin.sub.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/instrument-var-latin.sub.woff2" crossorigin>
+<link rel="preload" as="image" href="assets/img/food/taco-pastor-800.webp" imagesrcset="assets/img/food/taco-pastor-480.webp 480w, assets/img/food/taco-pastor-640.webp 640w, assets/img/food/taco-pastor-800.webp 800w, assets/img/food/taco-pastor-1200.webp 1200w" imagesizes="(max-width: 760px) 60vw, min(31vw, 500px)" fetchpriority="high">
+<link rel="stylesheet" href="assets/css/main.css">
+<link rel="stylesheet" href="assets/css/modules/loader.css">
+<link rel="stylesheet" href="assets/css/modules/deck.css">
+<link rel="stylesheet" href="assets/css/modules/anatomy.css">
+<link rel="stylesheet" href="assets/css/modules/salsas.css">
+<link rel="stylesheet" href="assets/css/modules/tabla.css">
+<script>
+/* O nome gigante só aparece com a fonte de título já carregada: se ele pintar
+   na fonte de reserva e trocar depois, a linha inteira muda de largura e a
+   página "pula". Rede de segurança de 2,5s para nunca sumir de vez. */
+(function(d){var r=d.documentElement;r.classList.add('js','fonts-pending');
+var go=function(){r.classList.remove('fonts-pending')};
+if(d.fonts&&d.fonts.ready){d.fonts.ready.then(go)}else{go()}
+setTimeout(go,2500)})(document);
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Restaurant",
+  "name": "¡Buenas! Taquería",
+  "servesCuisine": ["Mexican", "Tacos"],
+  "priceRange": "$",
+  "slogan": "Tacos worth shouting about",
+  "menu": "#deck",
+  "acceptsReservations": false,
+  "department": [
+    {
+      "@type": "Restaurant",
+      "name": "¡Buenas! Highland Park",
+      "telephone": "+1-323-555-0142",
+      "address": { "@type": "PostalAddress", "streetAddress": "York Blvd", "addressLocality": "Los Angeles", "addressRegion": "CA", "postalCode": "90042", "addressCountry": "US" },
+      "openingHoursSpecification": [
+        { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday"], "opens": "11:00", "closes": "23:00" },
+        { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Friday", "Saturday"], "opens": "11:00", "closes": "02:00" }
+      ]
+    },
+    {
+      "@type": "Restaurant",
+      "name": "¡Buenas! Boyle Heights",
+      "telephone": "+1-323-555-0187",
+      "address": { "@type": "PostalAddress", "streetAddress": "E Cesar E Chavez Ave", "addressLocality": "Los Angeles", "addressRegion": "CA", "postalCode": "90033", "addressCountry": "US" },
+      "openingHoursSpecification": [
+        { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], "opens": "10:00", "closes": "22:00" }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <path id="bean-path" d="M5,5 C11,-1 29,-1 35,6 C40,11 38,19 31,21 C25,23 23,18 19.5,18 C15,18 13,23 7,21 C1,19 0,9 5,5 Z"/>
+    <symbol id="excl-inv" viewBox="0 0 44 100">
+      <g transform="translate(3 3)" fill="#1D1511"><path d="M14 36 H26 L36 100 H4 Z"/><use href="#bean-path" transform="translate(2 4)"/></g>
+      <path d="M14 36 H26 L36 100 H4 Z" fill="#E5256E"/>
+      <g transform="translate(2 4)"><use href="#bean-path" fill="#E5256E"/><ellipse cx="19.5" cy="14.8" rx="3.4" ry="1.5" fill="#F4EAD8" opacity=".9"/></g>
+    </symbol>
+    <symbol id="excl" viewBox="0 0 44 100">
+      <g transform="translate(3 3)" fill="#1D1511"><path d="M4 0 H36 L26 64 H14 Z"/><use href="#bean-path" transform="translate(2 72)"/></g>
+      <path d="M4 0 H36 L26 64 H14 Z" fill="#F5CD3A"/>
+      <g transform="translate(2 72)"><use href="#bean-path" fill="#F5CD3A"/><ellipse cx="19.5" cy="14.8" rx="3.4" ry="1.5" fill="#1D1511" opacity=".35"/></g>
+    </symbol>
+    <symbol id="i-star" viewBox="0 0 20 20"><path d="M10 0l2.6 6.8L20 7.6l-5.6 4.8L16.2 20 10 16l-6.2 4 1.8-7.6L0 7.6l7.4-.8z"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="10" r="2.6" fill="currentColor"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><path d="M6.6 3h3l1.5 4.2-2 1.3a12 12 0 0 0 6.4 6.4l1.3-2L21 14.4v3A2.6 2.6 0 0 1 18.4 20 15.4 15.4 0 0 1 4 5.6 2.6 2.6 0 0 1 6.6 3z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></symbol>
+  </defs>
+</svg>
+
+<a class="skip" href="#main">Skip to content</a>
+<div class="grain" aria-hidden="true"></div>
+
+<!-- Abertura (módulo loader) -->
+<div class="loader" id="loader" aria-hidden="true">
+  <div class="loader__deck">
+    <div class="loader__card"><img srcset="assets/img/cards/el-pastor-200.webp 200w, assets/img/cards/el-pastor-300.webp 300w, assets/img/cards/el-pastor-360.webp 360w, assets/img/cards/el-pastor-480.webp 480w" sizes="(max-width: 760px) 34vw, 200px" src="assets/img/cards/el-pastor-300.webp" alt="" width="198" height="360"></div>
+    <div class="loader__card"><img srcset="assets/img/cards/la-birria-200.webp 200w, assets/img/cards/la-birria-300.webp 300w, assets/img/cards/la-birria-360.webp 360w, assets/img/cards/la-birria-480.webp 480w" sizes="(max-width: 760px) 34vw, 200px" src="assets/img/cards/la-birria-300.webp" alt="" width="275" height="360"></div>
+    <div class="loader__card"><img srcset="assets/img/cards/el-cazo-200.webp 200w, assets/img/cards/el-cazo-300.webp 300w, assets/img/cards/el-cazo-360.webp 360w, assets/img/cards/el-cazo-480.webp 480w" sizes="(max-width: 760px) 34vw, 200px" src="assets/img/cards/el-cazo-300.webp" alt="" width="253" height="360"></div>
+  </div>
+  <div class="loader__word"><svg class="excl"><use href="#excl-inv"/></svg><span>BUENAS</span><svg class="excl"><use href="#excl"/></svg></div>
+</div>
+
+<header class="site-header" id="siteHeader">
+  <a class="brand" href="#top" aria-label="¡Buenas! Taquería, back to top">
+    <svg class="excl" aria-hidden="true"><use href="#excl-inv"/></svg><span>BUENAS</span><svg class="excl" aria-hidden="true"><use href="#excl"/></svg>
+  </a>
+  <nav class="nav" aria-label="Primary">
+    <a href="#deck">Menu</a>
+    <a href="#salsas">Salsas</a>
+    <a href="#tabla">Rewards</a>
+    <a href="#cazo">Catering</a>
+    <a href="#mundo">Locations</a>
+  </nav>
+  <div class="header-actions">
+    <button class="btn btn--rosa btn--sm" type="button" data-order>Order online<svg class="btn__icon" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+    <button class="menu-toggle" type="button" id="menuToggle" aria-expanded="false" aria-controls="mobileMenu"><span></span><span></span><span class="sr-only">Open menu</span></button>
+  </div>
+</header>
+
+<div class="mobile-menu" id="mobileMenu" hidden>
+  <div class="mobile-menu__curtain mobile-menu__curtain--a"></div>
+  <div class="mobile-menu__curtain mobile-menu__curtain--b"></div>
+  <nav class="mobile-menu__nav" aria-label="Mobile">
+    <a href="#deck">Menu</a>
+    <a href="#salsas">Salsas</a>
+    <a href="#tabla">Rewards</a>
+    <a href="#cazo">Catering</a>
+    <a href="#mundo">Locations</a>
+    <button class="btn btn--cream" type="button" data-order>Order online<svg class="btn__icon" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+  </nav>
+</div>
+
+<main id="main">
+
+  <!-- HERO -->
+  <section class="hero" id="top" aria-labelledby="heroTitle">
+    <svg class="picado" data-picado aria-hidden="true"></svg>
+    <div class="hero__stage" id="heroStage">
+      <div class="orbit orbit--back" aria-hidden="true">
+        <img class="orbit__item" data-orbit="-0.35" style="--x:14%; --y:18%; --s:clamp(58px,7.4vw,118px); --r:-18deg;" src="assets/img/food/ing-chile-arbol-300.webp" srcset="assets/img/food/ing-chile-arbol-300.webp 230w, assets/img/food/ing-chile-arbol-600.webp 461w" sizes="120px" alt="" width="230" height="300">
+        <img class="orbit__item" data-orbit="-0.25" style="--x:84%; --y:16%; --s:clamp(64px,7.8vw,124px); --r:12deg;" src="assets/img/food/ing-cilantro-300.webp" srcset="assets/img/food/ing-cilantro-300.webp 276w, assets/img/food/ing-cilantro-600.webp 552w" sizes="124px" alt="" width="276" height="300">
+        <img class="orbit__item" data-orbit="-0.3" style="--x:50%; --y:6%; --s:clamp(50px,5.4vw,88px); --r:8deg;" src="assets/img/food/ing-rabano-300.webp" srcset="assets/img/food/ing-rabano-300.webp 300w, assets/img/food/ing-rabano-600.webp 600w" sizes="88px" alt="" width="300" height="295">
+      </div>
+
+      <h1 class="wm wm--back" id="heroTitle">
+        <span class="sr-only">¡Buenas! Taquería</span>
+        <span class="wm__inner" aria-hidden="true"><svg class="excl"><use href="#excl-inv"/></svg><span class="wm__word" data-text="BUENAS">BUENAS</span><svg class="excl"><use href="#excl"/></svg></span>
+      </h1>
+
+      <div class="hero__taco">
+        <img src="assets/img/food/taco-pastor-800.webp" srcset="assets/img/food/taco-pastor-480.webp 480w, assets/img/food/taco-pastor-640.webp 640w, assets/img/food/taco-pastor-800.webp 800w, assets/img/food/taco-pastor-1200.webp 1200w" sizes="(max-width: 760px) 60vw, min(31vw, 500px)" width="1200" height="1014" alt="A taco al pastor piled with trompo pork, roasted pineapple, onion, cilantro and salsa verde" fetchpriority="high" decoding="async">
+      </div>
+
+      <div class="wm wm--front" aria-hidden="true">
+        <span class="wm__inner"><svg class="excl"><use href="#excl-inv"/></svg><span class="wm__word" data-text="BUENAS">BUENAS</span><svg class="excl"><use href="#excl"/></svg></span>
+      </div>
+
+      <div class="orbit orbit--front" aria-hidden="true">
+        <img class="orbit__item" data-orbit="0.55" style="--x:24%; --y:74%; --s:clamp(70px,8.6vw,138px); --r:-10deg;" src="assets/img/food/ing-pina-300.webp" srcset="assets/img/food/ing-pina-300.webp 297w, assets/img/food/ing-pina-600.webp 594w" sizes="138px" alt="" width="297" height="300">
+        <img class="orbit__item" data-orbit="0.7" style="--x:78%; --y:70%; --s:clamp(72px,8.8vw,140px); --r:16deg;" src="assets/img/food/ing-limon-300.webp" srcset="assets/img/food/ing-limon-300.webp 280w, assets/img/food/ing-limon-600.webp 559w" sizes="140px" alt="" width="280" height="300">
+        <img class="orbit__item" data-orbit="0.45" style="--x:8%; --y:56%; --s:clamp(64px,7.6vw,122px); --r:-24deg;" src="assets/img/food/ing-cebolla-300.webp" srcset="assets/img/food/ing-cebolla-300.webp 300w, assets/img/food/ing-cebolla-600.webp 600w" sizes="122px" alt="" width="300" height="269">
+        <img class="orbit__item" data-orbit="0.6" style="--x:92%; --y:46%; --s:clamp(60px,7vw,112px); --r:28deg;" src="assets/img/food/ing-chile-verde-300.webp" srcset="assets/img/food/ing-chile-verde-300.webp 300w, assets/img/food/ing-chile-verde-600.webp 600w" sizes="112px" alt="" width="300" height="295">
+        <img class="orbit__item" data-orbit="0.4" style="--x:62%; --y:92%; --s:clamp(64px,7.4vw,118px); --r:0deg;" src="assets/img/food/ing-cebolla-cilantro-300.webp" srcset="assets/img/food/ing-cebolla-cilantro-300.webp 300w, assets/img/food/ing-cebolla-cilantro-600.webp 600w" sizes="118px" alt="" width="300" height="266">
+      </div>
+    </div>
+
+    <div class="hero__foot wrap">
+      <div class="hero__copy">
+        <p class="hero__tagline">Tacos worth <em>shouting</em> about.</p>
+        <p class="hero__lede">Hand-pressed tortillas, a trompo that spins 14 hours a day and salsas with a temper. Highland Park &amp; Boyle Heights, Los Angeles.</p>
+        <div class="hero__ctas">
+          <button class="btn btn--rosa" type="button" data-order>Order online<svg class="btn__icon" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+          <a class="btn btn--ghost" href="#deck">See the deck</a>
+        </div>
+      </div>
+      <a class="fan" href="#deck" aria-label="See the menu deck">
+        <span class="lcard lcard--mini" style="--tilt:-11deg"><span class="lcard__frame"><span class="lcard__num">No.<b>02</b></span><span class="lcard__art"><img srcset="assets/img/cards/la-birria-200.webp 200w, assets/img/cards/la-birria-300.webp 300w, assets/img/cards/la-birria-360.webp 360w, assets/img/cards/la-birria-480.webp 480w" sizes="(max-width: 760px) 30vw, 158px" src="assets/img/cards/la-birria-300.webp" alt="" width="275" height="360" loading="lazy"></span><span class="lcard__name">La Birria</span></span></span>
+        <span class="lcard lcard--mini" style="--tilt:2deg"><span class="lcard__frame"><span class="lcard__num">No.<b>01</b></span><span class="lcard__art"><img srcset="assets/img/cards/el-pastor-200.webp 200w, assets/img/cards/el-pastor-300.webp 300w, assets/img/cards/el-pastor-360.webp 360w, assets/img/cards/el-pastor-480.webp 480w" sizes="(max-width: 760px) 30vw, 158px" src="assets/img/cards/el-pastor-300.webp" alt="" width="198" height="360"></span><span class="lcard__name">El Pastor</span></span></span>
+        <span class="lcard lcard--mini" style="--tilt:12deg"><span class="lcard__frame"><span class="lcard__num">No.<b>03</b></span><span class="lcard__art"><img srcset="assets/img/cards/el-cazo-200.webp 200w, assets/img/cards/el-cazo-300.webp 300w, assets/img/cards/el-cazo-360.webp 360w, assets/img/cards/el-cazo-480.webp 480w" sizes="(max-width: 760px) 30vw, 158px" src="assets/img/cards/el-cazo-300.webp" alt="" width="253" height="360" loading="lazy"></span><span class="lcard__name">El Cazo</span></span></span>
+      </a>
+    </div>
+  </section>
+
+  <!-- FAIXAS CRUZADAS -->
+  <div class="bands" aria-hidden="true">
+    <div class="band band--cobalto" data-marquee="left">
+      <div class="band__track">
+        <span class="band__item">Al pastor</span><span class="band__item">Birria</span><span class="band__item">Carnitas</span><span class="band__item">Asada</span><span class="band__item">Nopal</span><span class="band__item">Camarón</span><span class="band__item">Pollo asado</span><span class="band__item">Horchata</span>
+      </div>
+    </div>
+    <div class="band band--rosa" data-marquee="right">
+      <div class="band__track">
+        <span class="band__item">Hand-pressed tortillas</span><span class="band__item">Open till 2 a.m. Fri &amp; Sat</span><span class="band__item">Salsas with a temper</span><span class="band__item">Since 2016</span><span class="band__item">Order direct, skip the fees</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- O BARALHO (módulo deck) -->
+  <section class="deck scallop-top" id="deck" data-module="deck" aria-labelledby="deckTitle">
+    <div class="wrap">
+      <div class="deck__head">
+        <h2 class="h2" id="deckTitle" data-split>Pick your <span class="hl">cards.</span></h2>
+        <p class="lede">Our menu is a lotería deck. Flip a card to meet the taco. Found your winner? Shout it.</p>
+      </div>
+      <div class="deck__stage" data-deck-stage>
+        <article class="lcard lcard--deck" data-card style="--back:var(--rosa-ink); --back-ink:var(--papel-3);">
+          <button class="lcard__flip" type="button" aria-pressed="false" aria-label="Flip the El Pastor card"></button>
+          <div class="lcard__inner">
+            <div class="lcard__face lcard__front"><div class="lcard__frame"><span class="lcard__num">No.<b>01</b></span><span class="lcard__art"><img srcset="assets/img/cards/el-pastor-200.webp 200w, assets/img/cards/el-pastor-300.webp 300w, assets/img/cards/el-pastor-360.webp 360w, assets/img/cards/el-pastor-480.webp 480w" sizes="(max-width: 760px) 42vw, 190px" src="assets/img/cards/el-pastor-300.webp" alt="Lotería-style illustration of a smiling trompo al pastor" width="198" height="360" loading="lazy"></span><span class="lcard__name">El Pastor</span></div></div>
+            <div class="lcard__face lcard__back">
+              <div class="lcard__dish" data-dish="d1-pastor"><img src="assets/img/food/ing-pina-300.webp" alt="" width="297" height="300" loading="lazy"><img src="assets/img/food/ing-limon-300.webp" alt="" width="280" height="300" loading="lazy"></div>
+              <div class="lcard__info"><span class="lcard__no">No. 01</span><h3 class="lcard__title">El Pastor</h3><p class="lcard__desc">Trompo-roasted pork in achiote and guajillo, roasted piña, onion, cilantro, salsa verde.</p><div class="lcard__row"><span class="price">$4.25</span><button class="lcard__order" type="button" data-order>Order<svg aria-hidden="true"><use href="#i-arrow"/></svg></button></div></div>
+            </div>
+          </div>
+        </article>
+        <article class="lcard lcard--deck" data-card style="--back:var(--tinta); --back-ink:var(--papel-3);">
+          <button class="lcard__flip" type="button" aria-pressed="false" aria-label="Flip the La Birria card"></button>
+          <div class="lcard__inner">
+            <div class="lcard__face lcard__front"><div class="lcard__frame"><span class="lcard__num">No.<b>02</b></span><span class="lcard__art"><img srcset="assets/img/cards/la-birria-200.webp 200w, assets/img/cards/la-birria-300.webp 300w, assets/img/cards/la-birria-360.webp 360w, assets/img/cards/la-birria-480.webp 480w" sizes="(max-width: 760px) 42vw, 190px" src="assets/img/cards/la-birria-300.webp" alt="Lotería-style illustration of a quesabirria dipping into a clay pot of consomé" width="275" height="360" loading="lazy"></span><span class="lcard__name">La Birria</span></div></div>
+            <div class="lcard__face lcard__back">
+              <div class="lcard__dish" data-dish="d1-birria"><img src="assets/img/food/ing-chile-arbol-300.webp" alt="" width="230" height="300" loading="lazy"><img src="assets/img/food/ing-cebolla-cilantro-300.webp" alt="" width="300" height="266" loading="lazy"></div>
+              <div class="lcard__info"><span class="lcard__no">No. 02</span><h3 class="lcard__title">La Birria</h3><p class="lcard__desc">Quesabirria: braised beef, melted Oaxaca cheese, griddled crisp, consomé for dipping.</p><div class="lcard__row"><span class="price">$5.50</span><button class="lcard__order" type="button" data-order>Order<svg aria-hidden="true"><use href="#i-arrow"/></svg></button></div></div>
+            </div>
+          </div>
+        </article>
+        <article class="lcard lcard--deck" data-card style="--back:var(--cempa); --back-ink:var(--tinta);">
+          <button class="lcard__flip" type="button" aria-pressed="false" aria-label="Flip the El Cazo card"></button>
+          <div class="lcard__inner">
+            <div class="lcard__face lcard__front"><div class="lcard__frame"><span class="lcard__num">No.<b>03</b></span><span class="lcard__art"><img srcset="assets/img/cards/el-cazo-200.webp 200w, assets/img/cards/el-cazo-300.webp 300w, assets/img/cards/el-cazo-360.webp 360w, assets/img/cards/el-cazo-480.webp 480w" sizes="(max-width: 760px) 42vw, 190px" src="assets/img/cards/el-cazo-300.webp" alt="Lotería-style illustration of a copper cazo bubbling with carnitas" width="253" height="360" loading="lazy"></span><span class="lcard__name">El Cazo</span></div></div>
+            <div class="lcard__face lcard__back">
+              <div class="lcard__dish" data-dish="d1-carnitas"><img src="assets/img/food/ing-cebolla-300.webp" alt="" width="300" height="269" loading="lazy"><img src="assets/img/food/ing-chile-verde-300.webp" alt="" width="300" height="295" loading="lazy"></div>
+              <div class="lcard__info"><span class="lcard__no">No. 03</span><h3 class="lcard__title">El Cazo</h3><p class="lcard__desc">Carnitas slow-cooked in a copper cazo, pickled red onion, salsa roja.</p><div class="lcard__row"><span class="price">$4.25</span><button class="lcard__order" type="button" data-order>Order<svg aria-hidden="true"><use href="#i-arrow"/></svg></button></div></div>
+            </div>
+          </div>
+        </article>
+        <article class="lcard lcard--deck" data-card style="--back:var(--verde); --back-ink:var(--papel-3);">
+          <button class="lcard__flip" type="button" aria-pressed="false" aria-label="Flip the La Asada card"></button>
+          <div class="lcard__inner">
+            <div class="lcard__face lcard__front"><div class="lcard__frame"><span class="lcard__num">No.<b>04</b></span><span class="lcard__art"><img srcset="assets/img/cards/la-asada-200.webp 200w, assets/img/cards/la-asada-300.webp 300w, assets/img/cards/la-asada-360.webp 360w, assets/img/cards/la-asada-480.webp 480w" sizes="(max-width: 760px) 42vw, 190px" src="assets/img/cards/la-asada-300.webp" alt="Lotería-style illustration of a steak sizzling on a charcoal grill" width="267" height="360" loading="lazy"></span><span class="lcard__name">La Asada</span></div></div>
+            <div class="lcard__face lcard__back">
+              <div class="lcard__dish" data-dish="d2-asada"><img src="assets/img/food/ing-chile-verde-300.webp" alt="" width="300" height="295" loading="lazy"><img src="assets/img/food/ing-rabano-300.webp" alt="" width="300" height="295" loading="lazy"></div>
+              <div class="lcard__info"><span class="lcard__no">No. 04</span><h3 class="lcard__title">La Asada</h3><p class="lcard__desc">Mesquite-grilled skirt steak, onion, cilantro, salsa roja, grilled green onion.</p><div class="lcard__row"><span class="price">$4.75</span><button class="lcard__order" type="button" data-order>Order<svg aria-hidden="true"><use href="#i-arrow"/></svg></button></div></div>
+            </div>
+          </div>
+        </article>
+        <article class="lcard lcard--deck" data-card style="--back:var(--maiz); --back-ink:var(--tinta);">
+          <button class="lcard__flip" type="button" aria-pressed="false" aria-label="Flip the El Nopal card"></button>
+          <div class="lcard__inner">
+            <div class="lcard__face lcard__front"><div class="lcard__frame"><span class="lcard__num">No.<b>05</b></span><span class="lcard__art"><img srcset="assets/img/cards/el-nopal-200.webp 200w, assets/img/cards/el-nopal-300.webp 300w, assets/img/cards/el-nopal-360.webp 360w, assets/img/cards/el-nopal-480.webp 480w" sizes="(max-width: 760px) 42vw, 190px" src="assets/img/cards/el-nopal-300.webp" alt="Lotería-style illustration of a smiling nopal cactus paddle" width="227" height="360" loading="lazy"></span><span class="lcard__name">El Nopal</span></div></div>
+            <div class="lcard__face lcard__back">
+              <div class="lcard__dish" data-dish="d2-nopal"><img src="assets/img/food/ing-cilantro-300.webp" alt="" width="276" height="300" loading="lazy"><img src="assets/img/food/ing-limon-300.webp" alt="" width="280" height="300" loading="lazy"></div>
+              <div class="lcard__info"><span class="lcard__no">No. 05 · Vegetarian</span><h3 class="lcard__title">El Nopal</h3><p class="lcard__desc">Grilled cactus, black beans, queso fresco, salsa verde.</p><div class="lcard__row"><span class="price">$3.95</span><button class="lcard__order" type="button" data-order>Order<svg aria-hidden="true"><use href="#i-arrow"/></svg></button></div></div>
+            </div>
+          </div>
+        </article>
+        <article class="lcard lcard--deck" data-card style="--back:var(--rosa-ink); --back-ink:var(--papel-3);">
+          <button class="lcard__flip" type="button" aria-pressed="false" aria-label="Flip the El Camarón card"></button>
+          <div class="lcard__inner">
+            <div class="lcard__face lcard__front"><div class="lcard__frame"><span class="lcard__num">No.<b>06</b></span><span class="lcard__art"><img srcset="assets/img/cards/el-camaron-200.webp 200w, assets/img/cards/el-camaron-300.webp 300w, assets/img/cards/el-camaron-360.webp 360w, assets/img/cards/el-camaron-480.webp 480w" sizes="(max-width: 760px) 42vw, 190px" src="assets/img/cards/el-camaron-300.webp" alt="Lotería-style illustration of a smiling shrimp holding a lime wedge" width="261" height="360" loading="lazy"></span><span class="lcard__name">El Camarón</span></div></div>
+            <div class="lcard__face lcard__back">
+              <div class="lcard__dish" data-dish="d2-camaron"><img src="assets/img/food/ing-limon-300.webp" alt="" width="280" height="300" loading="lazy"><img src="assets/img/food/ing-rabano-300.webp" alt="" width="300" height="295" loading="lazy"></div>
+              <div class="lcard__info"><span class="lcard__no">No. 06</span><h3 class="lcard__title">El Camarón</h3><p class="lcard__desc">Baja-style crispy shrimp, purple cabbage, chipotle crema, pico de gallo.</p><div class="lcard__row"><span class="price">$5.25</span><button class="lcard__order" type="button" data-order>Order<svg aria-hidden="true"><use href="#i-arrow"/></svg></button></div></div>
+            </div>
+          </div>
+        </article>
+        <article class="lcard lcard--deck" data-card style="--back:var(--tinta); --back-ink:var(--papel-3);">
+          <button class="lcard__flip" type="button" aria-pressed="false" aria-label="Flip the El Gallo card"></button>
+          <div class="lcard__inner">
+            <div class="lcard__face lcard__front"><div class="lcard__frame"><span class="lcard__num">No.<b>07</b></span><span class="lcard__art"><img srcset="assets/img/cards/el-gallo-200.webp 200w, assets/img/cards/el-gallo-300.webp 300w, assets/img/cards/el-gallo-360.webp 360w, assets/img/cards/el-gallo-480.webp 480w" sizes="(max-width: 760px) 42vw, 190px" src="assets/img/cards/el-gallo-300.webp" alt="Lotería-style illustration of a proud rooster crowing" width="244" height="360" loading="lazy"></span><span class="lcard__name">El Gallo</span></div></div>
+            <div class="lcard__face lcard__back">
+              <div class="lcard__dish" data-dish="d3-pollo"><img src="assets/img/food/ing-cebolla-300.webp" alt="" width="300" height="269" loading="lazy"><img src="assets/img/food/ing-cilantro-300.webp" alt="" width="276" height="300" loading="lazy"></div>
+              <div class="lcard__info"><span class="lcard__no">No. 07</span><h3 class="lcard__title">El Gallo</h3><p class="lcard__desc">Pollo asado, charred onions, avocado salsa.</p><div class="lcard__row"><span class="price">$4.25</span><button class="lcard__order" type="button" data-order>Order<svg aria-hidden="true"><use href="#i-arrow"/></svg></button></div></div>
+            </div>
+          </div>
+        </article>
+        <article class="lcard lcard--deck" data-card style="--back:var(--cempa); --back-ink:var(--tinta);">
+          <button class="lcard__flip" type="button" aria-pressed="false" aria-label="Flip the La Sandía card"></button>
+          <div class="lcard__inner">
+            <div class="lcard__face lcard__front"><div class="lcard__frame"><span class="lcard__num">No.<b>08</b></span><span class="lcard__art"><img srcset="assets/img/cards/la-sandia-200.webp 200w, assets/img/cards/la-sandia-300.webp 300w, assets/img/cards/la-sandia-360.webp 360w, assets/img/cards/la-sandia-480.webp 480w" sizes="(max-width: 760px) 42vw, 190px" src="assets/img/cards/la-sandia-300.webp" alt="Lotería-style illustration of a smiling watermelon slice" width="304" height="360" loading="lazy"></span><span class="lcard__name">La Sandía</span></div></div>
+            <div class="lcard__face lcard__back">
+              <div class="lcard__dish" data-dish="d3-sandia"><img src="assets/img/food/ing-limon-300.webp" alt="" width="280" height="300" loading="lazy"></div>
+              <div class="lcard__info"><span class="lcard__no">No. 08 · Agua fresca</span><h3 class="lcard__title">La Sandía</h3><p class="lcard__desc">Watermelon agua fresca, blended every morning, a squeeze of lime.</p><div class="lcard__row"><span class="price">$4.50</span><button class="lcard__order" type="button" data-order>Order<svg aria-hidden="true"><use href="#i-arrow"/></svg></button></div></div>
+            </div>
+          </div>
+        </article>
+      </div>
+      <div class="deck__more">
+        <h3 class="deck__more-title">Also on the menu</h3>
+        <ul class="menu-lines">
+          <li><span>Horchata</span><i aria-hidden="true"></i><span class="price">$4.50</span></li>
+          <li><span>Agua de jamaica</span><i aria-hidden="true"></i><span class="price">$4.50</span></li>
+          <li><span>Churros with cajeta</span><i aria-hidden="true"></i><span class="price">$5.00</span></li>
+          <li><span>Quesabirria plate, 3 tacos &amp; consomé</span><i aria-hidden="true"></i><span class="price">$15.95</span></li>
+          <li><span>Family pack, 12 tacos, chips &amp; 2 salsas</span><i aria-hidden="true"></i><span class="price">$44.00</span></li>
+        </ul>
+        <button class="btn btn--cream" type="button" data-order>Order online<svg class="btn__icon" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ANATOMIA DO PASTOR (módulo anatomy) -->
+  <section class="anatomy" id="anatomy" data-module="anatomy" aria-labelledby="anatomyTitle">
+    <div class="anatomy__pin" data-anatomy-pin>
+      <div class="wrap anatomy__grid">
+        <div class="anatomy__head">
+          <h2 class="h2" id="anatomyTitle" data-split>Anatomy of <span class="hl">El Pastor.</span></h2>
+        </div>
+        <div class="anatomy__stage" data-anatomy-stage>
+          <img class="anatomy__taco" src="assets/img/food/taco-pastor-800.webp" srcset="assets/img/food/taco-pastor-480.webp 480w, assets/img/food/taco-pastor-640.webp 640w, assets/img/food/taco-pastor-800.webp 800w" sizes="(max-width: 760px) 70vw, 32vw" width="1200" height="1014" alt="Taco al pastor, the finished build" loading="lazy">
+          <img class="anatomy__part" data-part="1" src="assets/img/food/ing-pina-300.webp" alt="" width="297" height="300" loading="lazy">
+          <img class="anatomy__part" data-part="2" src="assets/img/food/ing-cebolla-cilantro-300.webp" alt="" width="300" height="266" loading="lazy">
+          <img class="anatomy__part" data-part="3" src="assets/img/food/ing-chile-verde-300.webp" alt="" width="300" height="295" loading="lazy">
+          <img class="anatomy__part" data-part="4" src="assets/img/food/ing-limon-300.webp" alt="" width="280" height="300" loading="lazy">
+          <svg class="anatomy__lines" data-anatomy-lines aria-hidden="true"></svg>
+        </div>
+        <ol class="anatomy__steps" data-anatomy-steps>
+          <li data-step="0"><h3>The tortilla</h3><p>Heirloom yellow corn, nixtamalized every morning, pressed to order.</p></li>
+          <li data-step="1"><h3>The trompo</h3><p>Pork shoulder in achiote and guajillo, stacked by hand, spun for fourteen hours.</p></li>
+          <li data-step="2"><h3>The piña</h3><p>Roasted on top of the trompo, sliced straight onto your taco.</p></li>
+          <li data-step="3"><h3>Onion &amp; cilantro</h3><p>Chopped every hour, never earlier.</p></li>
+          <li data-step="4"><h3>The salsa</h3><p>Tomatillo and serrano, charred on the comal. Your call on how much.</p></li>
+          <li data-step="5"><h3>The limón</h3><p>Squeeze. Always squeeze.</p></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- LA MANO (a tortilla) -->
+  <section class="mano" id="mano" aria-labelledby="manoTitle">
+    <div class="wrap mano__grid">
+      <div class="mano__copy">
+        <h2 class="h2" id="manoTitle" data-split>Every tortilla starts in a <span class="hl">hand.</span></h2>
+        <p class="lede">Our masa starts as heirloom corn, nixtamalized every morning in our kitchen. We press each tortilla to order, so it hits the comal about ninety seconds before it hits your hands. It takes longer. You'll taste why.</p>
+        <dl class="stats">
+          <div class="stat"><dt><span data-count="14">14</span><small>h</small></dt><dd>on the trompo, every single day</dd></div>
+          <div class="stat"><dt><span data-count="90">90</span><small>s</small></dt><dd>from the press to your hands</dd></div>
+          <div class="stat"><dt><span data-count="0">0</span></dt><dd>tortillas from a bag. Ever.</dd></div>
+        </dl>
+      </div>
+      <div class="mano__visual">
+        <figure class="slot slot--photo mano__photo" data-parallax="-0.12" data-slot="L3"
+          data-src="assets/img/photos/hands-masa-1200.webp"
+          data-srcset="assets/img/photos/hands-masa-600.webp 600w, assets/img/photos/hands-masa-900.webp 900w, assets/img/photos/hands-masa-1200.webp 1200w"
+          data-sizes="(max-width: 760px) 88vw, 40vw"
+          data-alt="Two hands pressing masa in a cast-iron tortilla press">
+          <span class="slot__label">L3 · hands pressing tortillas</span>
+        </figure>
+        <div class="lcard lcard--big mano__card" data-parallax="0.16" style="--tilt:-6deg">
+          <div class="lcard__frame"><span class="lcard__num">No.<b>10</b></span><span class="lcard__art"><span class="slot slot--art" data-slot="C5" data-contain
+            data-src="assets/img/cards/la-mano-720.webp"
+            data-srcset="assets/img/cards/la-mano-360.webp 360w, assets/img/cards/la-mano-720.webp 720w"
+            data-sizes="(max-width: 760px) 40vw, 240px"
+            data-alt="Lotería-style illustration of a hand pressing a tortilla"><span class="slot__label">C5 · La Mano</span></span></span><span class="lcard__name">La Mano</span></div>
+        </div>
+        <svg class="seal mano__seal" data-seal="HECHO A MANO · TORTILLAS DEL DÍA · DESDE 2016 · " aria-hidden="true"></svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- EL DIABLITO (módulo salsas) -->
+  <section class="salsas scallop-top" id="salsas" data-module="salsas" aria-labelledby="salsasTitle">
+    <div class="wrap salsas__grid">
+      <div class="salsas__card">
+        <div class="lcard lcard--big" style="--tilt:5deg">
+          <div class="lcard__frame"><span class="lcard__num">No.<b>11</b></span><span class="lcard__art"><span class="slot slot--art" data-slot="C4" data-contain
+            data-src="assets/img/cards/el-diablito-720.webp"
+            data-srcset="assets/img/cards/el-diablito-360.webp 360w, assets/img/cards/el-diablito-720.webp 720w"
+            data-sizes="(max-width: 760px) 44vw, 260px"
+            data-alt="Lotería-style illustration of a little red devil holding a dried chile"><span class="slot__label">C4 · El Diablito</span></span></span><span class="lcard__name">El Diablito</span></div>
+        </div>
+      </div>
+      <div class="salsas__body">
+        <h2 class="h2" id="salsasTitle" data-split>Salsas with a <span class="hl">temper.</span></h2>
+        <div class="salsas__picker" role="radiogroup" aria-label="Pick a salsa" data-salsa-picker>
+          <button class="salsa" type="button" role="radio" aria-checked="true" data-salsa="verde" data-heat="1" data-bg="#2F7446">
+            <span class="salsa__bowl" style="--sauce:#6FA83A;"></span><span class="salsa__name">Verde Cruda</span>
+          </button>
+          <button class="salsa" type="button" role="radio" aria-checked="false" data-salsa="roja" data-heat="2" data-bg="#A8331F">
+            <span class="salsa__bowl" style="--sauce:#B03A22;"></span><span class="salsa__name">Roja Asada</span>
+          </button>
+          <button class="salsa" type="button" role="radio" aria-checked="false" data-salsa="habanero" data-heat="3" data-bg="#E9791A">
+            <span class="salsa__bowl" style="--sauce:#F28A1E;"></span><span class="salsa__name">Habanero Naranja</span>
+          </button>
+          <button class="salsa" type="button" role="radio" aria-checked="false" data-salsa="macha" data-heat="4" data-bg="#5B1411">
+            <span class="salsa__bowl" style="--sauce:#7A1C12;"></span><span class="salsa__name">Macha de Árbol</span>
+          </button>
+        </div>
+        <div class="salsas__detail" aria-live="polite" data-salsa-detail>
+          <p class="salsas__desc" data-salsa-desc>Bright, tangy, friendly. Tomatillo, serrano, cilantro, lime.</p>
+          <div class="heat" role="img" data-heat-meter aria-label="Heat level 1 of 4">
+            <img src="assets/img/food/ing-chile-arbol-300.webp" alt="" width="230" height="300" loading="lazy">
+            <img src="assets/img/food/ing-chile-arbol-300.webp" alt="" width="230" height="300" loading="lazy">
+            <img src="assets/img/food/ing-chile-arbol-300.webp" alt="" width="230" height="300" loading="lazy">
+            <img src="assets/img/food/ing-chile-arbol-300.webp" alt="" width="230" height="300" loading="lazy">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LA LUNA (madrugada) -->
+  <section class="luna" id="luna" aria-labelledby="lunaTitle">
+    <div class="luna__sky" aria-hidden="true" data-stars></div>
+    <div class="wrap luna__grid">
+      <div class="luna__copy">
+        <h2 class="h2" id="lunaTitle" data-split>The window stays open <span class="neon">late.</span></h2>
+        <p class="lede">Fridays and Saturdays until 2 a.m. at Highland Park. The trompo doesn't sleep, so neither do we.</p>
+        <p class="luna__hours"><span>Fri &amp; Sat</span><b>11 a.m. to 2 a.m.</b></p>
+      </div>
+      <div class="luna__art">
+        <img srcset="assets/img/cards/la-luna-200.webp 200w, assets/img/cards/la-luna-300.webp 300w, assets/img/cards/la-luna-360.webp 360w, assets/img/cards/la-luna-480.webp 480w" sizes="(max-width: 760px) 42vw, 190px" class="luna__moon" src="assets/img/cards/la-luna-300.webp" alt="Lotería-style illustration of a sleepy smiling crescent moon" width="477" height="586" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <!-- LA TABLA (módulo tabla) -->
+  <section class="tabla scallop-top" id="tabla" data-module="tabla" aria-labelledby="tablaTitle">
+    <div class="wrap tabla__grid">
+      <div class="tabla__copy">
+        <h2 class="h2" id="tablaTitle" data-split>Fill your tabla. <span class="hl">Eat for free.</span></h2>
+        <p class="lede">Buenas Rewards turns every visit into a marked card. Fill a row, shout it, and your next taco is on us.</p>
+        <p class="tabla__hint" data-tabla-hint>Try it: tap three cards in a row.</p>
+        <a class="btn btn--cream" href="#tabla" data-rewards>Join Buenas Rewards<svg class="btn__icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      </div>
+      <div class="tabla__board" data-tabla-board role="group" aria-label="Lotería board game, tap cards to mark them">
+        <button class="tcell" type="button" aria-pressed="false"><img srcset="assets/img/cards/el-gallo-200.webp 200w, assets/img/cards/el-gallo-300.webp 300w, assets/img/cards/el-gallo-360.webp 360w, assets/img/cards/el-gallo-480.webp 480w" sizes="(max-width: 760px) 27vw, 150px" src="assets/img/cards/el-gallo-300.webp" alt="El Gallo" width="244" height="360" loading="lazy"></button>
+        <button class="tcell" type="button" aria-pressed="false"><img srcset="assets/img/cards/la-luna-200.webp 200w, assets/img/cards/la-luna-300.webp 300w, assets/img/cards/la-luna-360.webp 360w, assets/img/cards/la-luna-480.webp 480w" sizes="(max-width: 760px) 27vw, 150px" src="assets/img/cards/la-luna-300.webp" alt="La Luna" width="293" height="360" loading="lazy"></button>
+        <button class="tcell" type="button" aria-pressed="false"><img srcset="assets/img/cards/el-nopal-200.webp 200w, assets/img/cards/el-nopal-300.webp 300w, assets/img/cards/el-nopal-360.webp 360w, assets/img/cards/el-nopal-480.webp 480w" sizes="(max-width: 760px) 27vw, 150px" src="assets/img/cards/el-nopal-300.webp" alt="El Nopal" width="227" height="360" loading="lazy"></button>
+        <button class="tcell" type="button" aria-pressed="false"><img srcset="assets/img/cards/la-birria-200.webp 200w, assets/img/cards/la-birria-300.webp 300w, assets/img/cards/la-birria-360.webp 360w, assets/img/cards/la-birria-480.webp 480w" sizes="(max-width: 760px) 27vw, 150px" src="assets/img/cards/la-birria-300.webp" alt="La Birria" width="275" height="360" loading="lazy"></button>
+        <button class="tcell" type="button" aria-pressed="false"><img srcset="assets/img/cards/el-pastor-200.webp 200w, assets/img/cards/el-pastor-300.webp 300w, assets/img/cards/el-pastor-360.webp 360w, assets/img/cards/el-pastor-480.webp 480w" sizes="(max-width: 760px) 27vw, 150px" src="assets/img/cards/el-pastor-300.webp" alt="El Pastor" width="198" height="360" loading="lazy"></button>
+        <button class="tcell" type="button" aria-pressed="false"><img srcset="assets/img/cards/el-camaron-200.webp 200w, assets/img/cards/el-camaron-300.webp 300w, assets/img/cards/el-camaron-360.webp 360w, assets/img/cards/el-camaron-480.webp 480w" sizes="(max-width: 760px) 27vw, 150px" src="assets/img/cards/el-camaron-300.webp" alt="El Camarón" width="261" height="360" loading="lazy"></button>
+        <button class="tcell" type="button" aria-pressed="false"><img srcset="assets/img/cards/la-sandia-200.webp 200w, assets/img/cards/la-sandia-300.webp 300w, assets/img/cards/la-sandia-360.webp 360w, assets/img/cards/la-sandia-480.webp 480w" sizes="(max-width: 760px) 27vw, 150px" src="assets/img/cards/la-sandia-300.webp" alt="La Sandía" width="304" height="360" loading="lazy"></button>
+        <button class="tcell" type="button" aria-pressed="false"><img srcset="assets/img/cards/el-cazo-200.webp 200w, assets/img/cards/el-cazo-300.webp 300w, assets/img/cards/el-cazo-360.webp 360w, assets/img/cards/el-cazo-480.webp 480w" sizes="(max-width: 760px) 27vw, 150px" src="assets/img/cards/el-cazo-300.webp" alt="El Cazo" width="253" height="360" loading="lazy"></button>
+        <button class="tcell" type="button" aria-pressed="false"><img srcset="assets/img/cards/la-estrella-200.webp 200w, assets/img/cards/la-estrella-300.webp 300w, assets/img/cards/la-estrella-360.webp 360w, assets/img/cards/la-estrella-480.webp 480w" sizes="(max-width: 760px) 27vw, 150px" src="assets/img/cards/la-estrella-300.webp" alt="La Estrella" width="341" height="360" loading="lazy"></button>
+      </div>
+    </div>
+    <div class="tabla__win" data-tabla-win hidden>
+      <p class="tabla__win-word">¡Buenas!</p>
+      <p class="tabla__win-text">That's a free taco on your next visit.</p>
+      <button class="btn btn--rosa" type="button" data-tabla-reset>Play again</button>
+    </div>
+  </section>
+
+  <!-- EL CAZO (catering) -->
+  <section class="cazo" id="cazo" aria-labelledby="cazoTitle">
+    <div class="wrap cazo__grid">
+      <figure class="slot slot--photo cazo__photo" data-slot="L5"
+        data-src="assets/img/photos/catering-1200.webp"
+        data-srcset="assets/img/photos/catering-600.webp 600w, assets/img/photos/catering-900.webp 900w, assets/img/photos/catering-1200.webp 1200w"
+        data-sizes="(max-width: 760px) 88vw, 46vw"
+        data-alt="A long taco bar catering spread seen from above">
+        <span class="slot__label">L5 · catering taco bar</span>
+      </figure>
+      <div class="cazo__body">
+        <h2 class="h2" id="cazoTitle" data-split>Feeding a crowd? We bring the <span class="hl">trompo.</span></h2>
+        <p class="lede">Taco bars for 20 to 300 guests: weddings, offices, backyard birthdays. We carve on site and leave the salsa.</p>
+        <form class="quote" id="quoteForm" novalidate>
+          <div class="field"><label for="qName">Name</label><input id="qName" name="name" autocomplete="name" required></div>
+          <div class="field"><label for="qEmail">Email</label><input id="qEmail" name="email" type="email" autocomplete="email" required></div>
+          <div class="field"><label for="qDate">Event date</label><input id="qDate" name="date" type="date" required></div>
+          <div class="field"><label for="qGuests">Guests</label><input id="qGuests" name="guests" type="number" min="20" max="300" step="10" placeholder="50" required></div>
+          <button class="btn btn--rosa quote__submit" type="submit">Get a quote<svg class="btn__icon" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+          <p class="quote__status" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- LA ESTRELLA (avaliações) -->
+  <section class="estrella" id="estrella" aria-labelledby="estrellaTitle">
+    <div class="wrap estrella__head">
+      <img srcset="assets/img/cards/la-estrella-200.webp 200w, assets/img/cards/la-estrella-300.webp 300w, assets/img/cards/la-estrella-360.webp 360w, assets/img/cards/la-estrella-480.webp 480w" sizes="(max-width: 760px) 42vw, 190px" class="estrella__art" src="assets/img/cards/la-estrella-300.webp" alt="" width="341" height="360" loading="lazy">
+      <h2 class="h2" id="estrellaTitle" data-split>Five stars, zero <span class="hl">leftovers.</span></h2>
+    </div>
+    <div class="reviews" data-marquee="left" data-marquee-speed="70">
+      <div class="reviews__track">
+        <figure class="review"><div class="review__stars" role="img" aria-label="5 out of 5 stars"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></div><blockquote>The al pastor made me cancel my other dinner plans.</blockquote><figcaption>Maya R. · Google</figcaption></figure>
+        <figure class="review"><div class="review__stars" role="img" aria-label="5 out of 5 stars"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></div><blockquote>Tortillas so fresh they're still warm when they land.</blockquote><figcaption>Chris D. · Yelp</figcaption></figure>
+        <figure class="review"><div class="review__stars" role="img" aria-label="5 out of 5 stars"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></div><blockquote>The macha de árbol lived up to the waiver.</blockquote><figcaption>Jordan K. · Google</figcaption></figure>
+        <figure class="review"><div class="review__stars" role="img" aria-label="5 out of 5 stars"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></div><blockquote>Best 2 a.m. decision I've ever made.</blockquote><figcaption>Priya S. · Google</figcaption></figure>
+        <figure class="review"><div class="review__stars" role="img" aria-label="5 out of 5 stars"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></div><blockquote>Birria consomé I'd drink by the cup.</blockquote><figcaption>Luis M. · Yelp</figcaption></figure>
+        <figure class="review"><div class="review__stars" role="img" aria-label="5 out of 5 stars"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></div><blockquote>They carved the trompo at our wedding. Our guests still talk about it.</blockquote><figcaption>Sam &amp; Alex · Google</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- EL MUNDO (unidades) -->
+  <section class="mundo" id="mundo" aria-labelledby="mundoTitle">
+    <div class="wrap">
+      <h2 class="h2" id="mundoTitle" data-split>Two windows, one <span class="hl">trompo.</span></h2>
+      <div class="places">
+        <article class="place" data-place="hp">
+          <figure class="slot slot--photo place__photo" data-slot="L1"
+            data-src="assets/img/photos/storefront-hp-1200.webp"
+            data-srcset="assets/img/photos/storefront-hp-600.webp 600w, assets/img/photos/storefront-hp-900.webp 900w, assets/img/photos/storefront-hp-1200.webp 1200w"
+            data-sizes="(max-width: 760px) 92vw, 44vw"
+            data-alt="The pink ¡Buenas! storefront in Highland Park at dusk"><span class="slot__label">L1 · pink storefront</span></figure>
+          <div class="place__body">
+            <div class="place__top"><h3 class="place__name">Highland Park</h3><span class="status" data-status>Open daily</span></div>
+            <p class="place__addr"><svg aria-hidden="true"><use href="#i-pin"/></svg>York Blvd, Highland Park, Los Angeles, CA 90042</p>
+            <p class="place__phone"><svg aria-hidden="true"><use href="#i-phone"/></svg><a href="tel:+13235550142">(323) 555-0142</a></p>
+            <ul class="hours"><li><span>Sun to Thu</span><span>11 a.m. to 11 p.m.</span></li><li><span>Fri &amp; Sat</span><span>11 a.m. to 2 a.m.</span></li></ul>
+            <div class="place__ctas"><a class="btn btn--ghost btn--sm" href="https://www.google.com/maps/search/?api=1&amp;query=York+Blvd+Highland+Park+Los+Angeles" target="_blank" rel="noopener">Directions</a><button class="btn btn--rosa btn--sm" type="button" data-order data-order-place="hp">Order pickup</button></div>
+          </div>
+        </article>
+        <article class="place" data-place="bh">
+          <figure class="slot slot--photo place__photo" data-slot="L1b"
+            data-src="assets/img/photos/storefront-bh-1200.webp"
+            data-srcset="assets/img/photos/storefront-bh-600.webp 600w, assets/img/photos/storefront-bh-900.webp 900w, assets/img/photos/storefront-bh-1200.webp 1200w"
+            data-sizes="(max-width: 760px) 92vw, 44vw"
+            data-alt="The original ¡Buenas! walk-up window in Boyle Heights"><span class="slot__label">L1 · the original window</span></figure>
+          <div class="place__body">
+            <div class="place__top"><h3 class="place__name">Boyle Heights</h3><span class="status" data-status>Open daily</span></div>
+            <p class="place__addr"><svg aria-hidden="true"><use href="#i-pin"/></svg>E Cesar E Chavez Ave, Boyle Heights, Los Angeles, CA 90033</p>
+            <p class="place__phone"><svg aria-hidden="true"><use href="#i-phone"/></svg><a href="tel:+13235550187">(323) 555-0187</a></p>
+            <ul class="hours"><li><span>Every day</span><span>10 a.m. to 10 p.m.</span></li></ul>
+            <div class="place__ctas"><a class="btn btn--ghost btn--sm" href="https://www.google.com/maps/search/?api=1&amp;query=Cesar+Chavez+Ave+Boyle+Heights+Los+Angeles" target="_blank" rel="noopener">Directions</a><button class="btn btn--rosa btn--sm" type="button" data-order data-order-place="bh">Order pickup</button></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <svg class="picado picado--footer" data-picado aria-hidden="true"></svg>
+  <div class="wrap footer__grid">
+    <div class="footer__col">
+      <p class="footer__title">Eat</p>
+      <button class="footer__link" type="button" data-order>Order online</button>
+      <a class="footer__link" href="#deck">Menu</a>
+      <a class="footer__link" href="#cazo">Catering</a>
+      <a class="footer__link" href="#tabla">Buenas Rewards</a>
+    </div>
+    <div class="footer__col">
+      <p class="footer__title">Visit</p>
+      <a class="footer__link" href="#mundo">Highland Park</a>
+      <a class="footer__link" href="#mundo">Boyle Heights</a>
+      <a class="footer__link" href="#luna">Late night</a>
+    </div>
+    <div class="footer__col">
+      <p class="footer__title">Hola</p>
+      <a class="footer__link" href="#top">Gift cards</a>
+      <a class="footer__link" href="#top">Careers</a>
+      <a class="footer__link" href="#top">Instagram</a>
+      <a class="footer__link" href="#top">TikTok</a>
+    </div>
+    <svg class="seal footer__seal" data-seal="TACOS WORTH SHOUTING ABOUT · LOS ANGELES · " aria-hidden="true"></svg>
+  </div>
+  <div class="footer__giant" aria-hidden="true"><svg class="excl"><use href="#excl-inv"/></svg><span>BUENAS</span><svg class="excl"><use href="#excl"/></svg></div>
+  <p class="footer__legal wrap">Concept project by Leonardo Ferreira. ¡Buenas! is a fictional taquería; names, reviews and addresses are illustrative.</p>
+</footer>
+
+<div class="dock" id="dock">
+  <button class="btn btn--rosa" type="button" data-order>Order online</button>
+  <a class="btn btn--ghost" href="#mundo">Find us</a>
+</div>
+
+<dialog class="order" id="orderDialog" aria-labelledby="orderTitle">
+  <form method="dialog" class="order__inner">
+    <button class="order__close" value="close" aria-label="Close"><svg aria-hidden="true"><use href="#i-close"/></svg></button>
+    <h2 class="order__title" id="orderTitle">How do you want your tacos?</h2>
+    <div class="order__places" role="radiogroup" aria-label="Pick a location">
+      <label class="order__place"><input type="radio" name="place" value="hp" checked><span>Highland Park</span></label>
+      <label class="order__place"><input type="radio" name="place" value="bh"><span>Boyle Heights</span></label>
+    </div>
+    <a class="order__direct" href="#order">
+      <span class="order__direct-top"><b>Order direct</b><span>Pickup in about 15 min</span></span>
+      <span class="order__direct-note">Best price, no app fees, and it counts for Buenas Rewards.</span>
+    </a>
+    <div class="order__apps">
+      <a class="order__app" href="#order">DoorDash</a>
+      <a class="order__app" href="#order">Uber Eats</a>
+    </div>
+    <p class="order__fine">Concept site: these buttons would open the restaurant's own Toast, Square or ChowNow page.</p>
+  </form>
+</dialog>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/SplitText.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/CustomEase.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js" defer></script>
+<script src="assets/js/main.js" defer></script>
+<script src="assets/js/modules/loader.js" defer></script>
+<script src="assets/js/modules/deck.js" defer></script>
+<script src="assets/js/modules/anatomy.js" defer></script>
+<script src="assets/js/modules/salsas.js" defer></script>
+<script src="assets/js/modules/tabla.js" defer></script>
+</body>
+</html>

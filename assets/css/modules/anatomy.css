@@ -1,0 +1,133 @@
+/* ==========================================================================
+   ¡Buenas! Taquería · módulo ANATOMY (vista explodida do pastor)
+   A base estática mora em main.css: taco no centro, 4 ingredientes nos cantos,
+   6 passos legíveis. Aqui só entra o que o movimento precisa.
+
+   Princípio: o estado FINAL da animação é exatamente o estado natural do CSS.
+   O scroll anima DO recolhido PARA o que já está na tela. Se o JS não rodar,
+   se o pin falhar, se o GSAP não carregar, a seção continua certa e legível.
+   ========================================================================== */
+
+/* ---------- empilhamento: ingrediente atrás do taco (parece guardado dentro) */
+.anatomy__stage { isolation: isolate; }
+.anatomy__part { z-index: 1; }
+.anatomy__taco { z-index: 2; }
+.anatomy__lines { z-index: 3; }
+
+/* will-change só enquanto a seção está em cena (classe posta pelo JS) */
+.anatomy__stage.is-live .anatomy__taco,
+.anatomy__stage.is-live .anatomy__part { will-change: transform; }
+
+/* ==========================================================================
+   Traço do diagrama (nós criados por JS dentro de [data-anatomy-lines])
+   ========================================================================== */
+.anatomy__lines .aline,
+.anatomy__lines .amark,
+.anatomy__lines .aleader { fill: none; vector-effect: non-scaling-stroke; }
+
+/* linha-guia do taco até a peça */
+.anatomy__lines .aline {
+  stroke: var(--tinta);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-dasharray: 1;          /* pathLength="1": o desenho independe do tamanho */
+  opacity: .8;
+}
+
+/* marcas de registro nos cantos (cara de prova de impressão) */
+.anatomy__lines .amark {
+  stroke: var(--tinta);
+  stroke-width: 2;
+  stroke-linecap: square;
+  stroke-linejoin: miter;
+  stroke-dasharray: 1;
+  opacity: .38;
+}
+
+/* linha fina que liga a peça ativa à legenda do passo */
+.anatomy__lines .aleader {
+  stroke: var(--rosa);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 1;
+  opacity: 0;
+}
+
+/* bolinha na ponta: cor chapada + contorno de tinta, igual carta e selo */
+.anatomy__lines .adot {
+  stroke: var(--tinta);
+  stroke-width: 2;
+  vector-effect: non-scaling-stroke;
+  transform-box: fill-box;
+  transform-origin: 50% 50%;
+}
+.anatomy__lines .adot--0 { fill: var(--rosa); }
+.anatomy__lines .adot--1 { fill: var(--cempa); }
+.anatomy__lines .adot--2 { fill: var(--cobalto); }
+.anatomy__lines .adot--3 { fill: var(--verde); }
+.anatomy__lines .adot--4 { fill: var(--maiz); }
+
+/* número do passo junto da bolinha, com halo de papel pra nunca sumir */
+.anatomy__lines .anum {
+  font-family: var(--slab);
+  font-size: 13px;
+  fill: var(--tinta);
+  paint-order: stroke;
+  stroke: var(--papel);
+  stroke-width: 4px;
+  stroke-linejoin: round;
+}
+
+/* ==========================================================================
+   Lista de passos
+   ========================================================================== */
+/* o passo ativo existe nos dois modos; o apagamento dos outros, só no pin */
+.anatomy__steps li::before { transition: color .5s var(--ease); }
+.anatomy__steps li.is-on::before { color: var(--rosa); }
+
+@media (min-width: 761px) {
+  .anatomy__steps.is-seq li {
+    opacity: .34;
+    transform: translateX(-4px);
+    margin-left: -16px;
+    padding-left: 14px;                       /* -16 + 2 de borda + 14 = 0 líquido */
+    border-left: 2px solid transparent;
+    transition: opacity .5s var(--ease), transform .5s var(--ease), border-color .5s var(--ease);
+  }
+  .anatomy__steps.is-seq li::before { color: var(--tinta-2); }
+  .anatomy__steps.is-seq li.is-on {
+    opacity: 1;
+    transform: none;
+    border-left-color: var(--rosa);
+  }
+  .anatomy__steps.is-seq li.is-on::before { color: var(--rosa); }
+}
+
+/* ==========================================================================
+   Modo preso (pin) — só existe com movimento ligado E com o JS tendo montado
+   ========================================================================== */
+@media (min-width: 761px) {
+  .motion-ok .anatomy.is-pinned { padding-block: 0; }
+  .motion-ok .anatomy.is-pinned .anatomy__pin {
+    display: flex;
+    align-items: center;
+    min-height: 100svh;
+    padding-top: var(--header-h);             /* o cabeçalho fixo não come o título */
+  }
+  .motion-ok .anatomy.is-pinned .anatomy__pin > .wrap { flex: 1 1 auto; }
+  /* palco limitado pela altura da tela: o conteúdo preso nunca passa do viewport */
+  .motion-ok .anatomy.is-pinned .anatomy__stage {
+    width: min(100%, 58svh);
+    margin-inline: auto;
+  }
+}
+
+/* ==========================================================================
+   Sem movimento: nada de transição, nada de diagrama
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .anatomy__steps li,
+  .anatomy__steps li::before { transition: none !important; opacity: 1 !important; transform: none !important; }
+  .anatomy__lines { display: none; }
+}

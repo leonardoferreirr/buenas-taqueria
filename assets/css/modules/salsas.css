@@ -1,0 +1,128 @@
+/* ==========================================================================
+   ¡Buenas! Taquería · El Diablito (salsas)
+   Carrega DEPOIS do main.css: mesma especificidade sobrescreve por ordem.
+   Nada aqui nasce invisível. O JS só escreve custom properties e classes.
+   ========================================================================== */
+
+/* ---------- pele da seção (o JS troca as vars; a cor faz o resto) ---------- */
+.salsas {
+  --salsa-ink: var(--papel-3);
+  --salsa-hl: var(--maiz);
+  --salsa-ink-40: rgba(251, 245, 234, .4);
+  --salsa-ink-12: rgba(251, 245, 234, .12);
+  --sec-bg: var(--salsa-bg, var(--verde));
+  background-color: var(--salsa-bg, var(--verde));
+  color: var(--salsa-ink);
+  transition: background-color .7s var(--ease), color .45s var(--ease);
+}
+.salsas .h2 .hl { color: var(--salsa-hl); transition: color .45s var(--ease); }
+.salsas .lede,
+.salsas__desc { color: inherit; }
+.salsas__detail { border-top-color: var(--salsa-ink-40); transition: border-color .45s var(--ease); }
+/* o foco tem que aparecer nos 4 fundos, e o cobalto padrão some no verde/macha */
+.salsas :focus-visible { outline-color: var(--salsa-ink); }
+
+/* ---------- carta El Diablito ---------- */
+.salsas__card .lcard { transition: transform .55s var(--ease-back); }
+.salsas.is-hot .salsas__card .lcard { transform: rotate(7.5deg) scale(1.02); }
+
+/* ---------- potinhos ---------- */
+.salsa { position: relative; }
+.salsa__bowl { transform-origin: 50% 84%; }
+.salsa[aria-checked="true"] { border-color: var(--salsa-ink); background: var(--salsa-ink-12); }
+.salsa[aria-checked="true"] .salsa__bowl {
+  box-shadow: inset 0 -7px 0 rgba(0, 0, 0, .18), 0 15px 24px rgba(0, 0, 0, .34);
+}
+.salsa__name { transition: transform .35s var(--ease-back); }
+
+@media (hover: hover) and (pointer: fine) {
+  .salsa:hover .salsa__bowl { will-change: transform; animation: salsaWobble .62s var(--ease-back); }
+  .salsa:hover .salsa__name { transform: translateY(-2px); }
+}
+@keyframes salsaWobble {
+  0%   { transform: rotate(0) scale(1); }
+  26%  { transform: rotate(-7deg) scale(1.055); }
+  54%  { transform: rotate(5deg) scale(1.03); }
+  78%  { transform: rotate(-2.5deg) scale(1.012); }
+  100% { transform: rotate(0) scale(1); }
+}
+
+/* ---------- respingo ao trocar de salsa (criado e removido pelo JS) ---------- */
+.salsa__splash { position: absolute; inset: 0; z-index: 2; pointer-events: none; }
+.salsa__ring {
+  position: absolute; inset: 8%; border-radius: 50%;
+  border: 3px solid var(--sauce, var(--rosa));
+  opacity: 0;
+  animation: salsaRing .62s var(--ease) forwards;
+}
+@keyframes salsaRing {
+  0%   { transform: scale(.52); opacity: .9; }
+  100% { transform: scale(1.48); opacity: 0; }
+}
+.salsa__drop {
+  position: absolute; top: 70%; left: 50%;
+  width: var(--dw, 7px); height: calc(var(--dw, 7px) * 1.3);
+  margin-left: calc(var(--dw, 7px) / -2);
+  border-radius: 50% 50% 46% 46% / 40% 40% 60% 60%;
+  background: var(--sauce, var(--rosa));
+  box-shadow: 0 1px 0 rgba(0, 0, 0, .28);
+  opacity: 0;
+  animation: salsaDrop var(--dd, .72s) var(--ease) var(--ddelay, 0s) forwards;
+}
+@keyframes salsaDrop {
+  0%   { transform: translate(0, 0) scale(.45); opacity: 0; }
+  16%  { opacity: 1; }
+  100% { transform: translate(var(--dx, 0px), var(--dy, 30px)) scale(.92); opacity: 0; }
+}
+
+/* ---------- medidor de ardência ----------
+   Estado de partida sem JS = Verde Cruda, 1 de 4 (nth-child), o JS assume daqui.
+   O transform sai da lista de transição: quem anima o quique é o GSAP. */
+.heat img {
+  transform-origin: 50% 82%;
+  transition: opacity .32s var(--ease), filter .32s var(--ease);
+}
+.heat img:nth-child(n + 2),
+.heat img.is-off { opacity: .26; filter: grayscale(1) brightness(.88); }
+.heat img.is-lit { opacity: 1; filter: none; }
+
+/* ---------- selo "¡Ay!" (SVG montado pelo JS dentro da carta) ---------- */
+.salsas__seal {
+  position: absolute; z-index: 5; top: -7%; right: -15%;
+  width: clamp(96px, 9.2vw, 136px); height: auto; aspect-ratio: 1;
+  overflow: visible; pointer-events: none;
+  opacity: 0; transform: scale(.34) rotate(-24deg);
+  filter: drop-shadow(0 12px 18px rgba(29, 21, 17, .35));
+  transition: opacity .16s linear, transform .52s var(--ease-back);
+}
+.salsas__seal.is-on { opacity: 1; transform: scale(1) rotate(-9deg); will-change: transform, opacity; }
+.salsas__seal.is-leaving {
+  opacity: 0; transform: scale(.88) rotate(3deg);
+  transition: opacity .3s var(--ease), transform .3s var(--ease);
+}
+.salsas__seal .seal__spin { transform-origin: 100px 100px; animation: spin 18s linear infinite; }
+.salsas__seal .seal__star { fill: var(--maiz); stroke: var(--tinta); stroke-width: 4; stroke-linejoin: round; }
+.salsas__seal .seal__disc { fill: var(--rosa); stroke: var(--tinta); stroke-width: 4; }
+.salsas__seal .seal__word {
+  font-family: var(--display);
+  font-variation-settings: "wdth" 68, "wght" 900;
+  font-weight: 900; font-size: 50px; fill: var(--papel-3);
+}
+
+/* ---------- celular ---------- */
+@media (max-width: 760px) {
+  .salsas__picker { gap: 12px; }
+  .salsa { padding: 10px 4px 12px; }
+  .salsas__seal { top: -5%; right: -12%; width: clamp(84px, 23vw, 108px); }
+}
+@media (max-width: 420px) {
+  .salsa__name { font-size: 13.5px; }
+  .salsas__seal { width: 84px; right: -10%; }
+}
+
+/* ---------- acessibilidade ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .salsa:hover .salsa__bowl { animation: none; }
+  .salsas__seal .seal__spin { animation: none; }
+  .salsa__splash { display: none; }
+}

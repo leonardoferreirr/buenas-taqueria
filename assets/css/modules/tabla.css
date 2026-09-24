@@ -1,0 +1,207 @@
+/* ==========================================================================
+   ¡Buenas! Taquería · módulo "La Tabla" — o tabuleiro jogável
+   Só tokens do :root do main.css. Carrega DEPOIS do main.css, então os poucos
+   overrides de .tcell vencem por ordem de cascata (mesma especificidade).
+
+   Divisão de trabalho com o JS:
+     · a propriedade `translate` (independente) centraliza o feijão e faz o
+       hover da carta;
+     · a propriedade `transform` fica inteira pro GSAP.
+     Assim CSS e JS nunca se sobrescrevem.
+   ========================================================================== */
+
+/* ---------------------------------------------------------------- tabuleiro */
+.tabla__board {
+  position: relative;          /* origem do traço vencedor e da medição das cartas */
+  isolation: isolate;
+}
+
+.tcell {
+  overflow: visible;           /* o feijão cai de fora da carta, não pode ser cortado */
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  box-shadow: 0 2px 0 rgba(29, 21, 17, .22);
+  transition:
+    translate .28s var(--ease),
+    box-shadow .28s var(--ease),
+    background-color .3s var(--ease),
+    border-color .3s var(--ease);
+}
+.tcell img {
+  border-radius: 4px;
+  transition: scale .4s var(--ease-back), filter .4s var(--ease);
+}
+
+.tcell.is-marked {
+  z-index: 2;
+  background: var(--papel-2);
+  box-shadow: 0 2px 0 rgba(29, 21, 17, .22), inset 0 0 0 2px rgba(29, 21, 17, .1);
+}
+.tcell.is-marked img { filter: saturate(1.3) contrast(1.05) brightness(.84); scale: .93; }
+.tcell.is-busy, .tcell.is-demo { z-index: 3; }
+
+.tcell.is-win { background: var(--maiz); }
+.tcell.is-win img { filter: saturate(1.15) contrast(1.02) brightness(.95); }
+
+@media (hover: hover) and (pointer: fine) {
+  .tcell:hover:not(:disabled) { translate: 0 -3px; box-shadow: 0 5px 0 var(--tinta); }
+  .tcell:hover:not(:disabled) img { scale: 1.05; }
+  .tcell.is-marked:hover:not(:disabled) img { scale: .97; }
+}
+.tcell:active:not(:disabled) { translate: 0 1px; box-shadow: 0 1px 0 rgba(29, 21, 17, .3); }
+.tcell:disabled { cursor: default; }
+
+/* estalo das três cartas da linha, só quando o movimento está ligado */
+.motion-ok .tcell.is-win { animation: tablaWin .5s var(--ease-back) .38s both; }
+@keyframes tablaWin { 0%, 100% { scale: 1; } 45% { scale: 1.055; } }
+
+/* ------------------------------------------------------------------ o feijão */
+.tbean {
+  position: absolute;
+  left: 50%; top: 50%;
+  translate: -50% -50%;        /* centro fixo aqui: o transform fica livre pro GSAP */
+  width: 52%;
+  height: auto;
+  aspect-ratio: 50 / 36;       /* trava a proporção do viewBox em qualquer navegador */
+  overflow: visible;
+  pointer-events: none;
+  z-index: 2;
+}
+.tbean__shade { fill: var(--tinta); opacity: .34; }
+.tbean__body { fill: var(--bean-c, var(--rosa)); }
+.tbean__eye { fill: var(--bean-eye, var(--papel-3)); opacity: .55; }
+.tbean--ghost { opacity: .82; }
+
+/* uma cor de feijão por carta: fixa, então o tabuleiro repete igual a cada partida */
+.tcell:nth-child(1), .tcell:nth-child(6) { --bean-c: var(--rosa);    --bean-eye: var(--papel-3); }
+.tcell:nth-child(2), .tcell:nth-child(7) { --bean-c: var(--maiz);    --bean-eye: var(--tinta); }
+.tcell:nth-child(3), .tcell:nth-child(8) { --bean-c: var(--cobalto); --bean-eye: var(--papel-3); }
+.tcell:nth-child(4), .tcell:nth-child(9) { --bean-c: var(--cempa);   --bean-eye: var(--tinta); }
+.tcell:nth-child(5)                      { --bean-c: var(--verde);   --bean-eye: var(--papel-3); }
+
+/* ------------------------------------------------------- traço da linha vencedora */
+.tabla__line {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  overflow: visible;
+  pointer-events: none;
+  z-index: 4;
+}
+.tabla__line[hidden] { display: none; }
+.tabla__line-back {
+  fill: none; stroke: var(--tinta); stroke-width: 13;
+  stroke-linecap: round; stroke-linejoin: round;
+}
+.tabla__line-ink {
+  fill: none; stroke: var(--maiz); stroke-width: 8.5;
+  stroke-linecap: round; stroke-linejoin: round;
+}
+
+/* ------------------------------------------------------------- papel picado */
+.tabla__picado {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  z-index: 6;
+  pointer-events: none;                    /* camada decorativa nunca bloqueia clique */
+}
+
+/* ------------------------------------------------------------- dica viva */
+.tabla__hint {
+  max-width: 34ch;
+  min-height: 1.6em;
+  transition: color .3s var(--ease);
+}
+.tabla__hint.is-win { color: var(--maiz); }
+
+/* --------------------------------------------------- cartaz "¡Buenas!" (vitória)
+   Ancorado no centro do tabuleiro pelo JS (--win-x / --win-y), com fallback
+   no centro da seção caso o script não tenha medido ainda. */
+.tabla__win {
+  position: absolute;
+  z-index: 7;
+  left: var(--win-x, 50%);
+  top: var(--win-y, 50%);
+  translate: -50% -50%;
+  transform: rotate(-2deg);
+  width: min(430px, calc(100% - var(--gutter) * 2));
+  display: grid;
+  justify-items: center;
+  gap: 12px;
+  text-align: center;
+  padding: clamp(24px, 2.8vw, 36px) clamp(18px, 2.4vw, 30px) clamp(20px, 2.4vw, 30px);
+  background: var(--papel-3);
+  color: var(--tinta);
+  border: var(--line) solid var(--tinta);
+  border-radius: 24px;
+  box-shadow: 0 12px 0 var(--tinta), 0 40px 60px -26px rgba(29, 21, 17, .7);
+}
+.tabla__win[hidden] { display: none; }
+.tabla__win:focus { outline: none; }
+.tabla__win:focus-visible { outline: 3px solid var(--cobalto); outline-offset: 5px; }
+
+/* faixinha recortada no topo, no degradê da marca */
+.tabla__win::after {
+  content: "";
+  position: absolute; left: 18px; right: 18px; top: 0; height: 9px;
+  background: var(--fountain);
+  -webkit-mask: radial-gradient(circle at 50% 0, transparent 5px, #000 5.8px) 0 0 / 14px 9px repeat-x;
+          mask: radial-gradient(circle at 50% 0, transparent 5px, #000 5.8px) 0 0 / 14px 9px repeat-x;
+  pointer-events: none;
+}
+
+.tabla__win-word {
+  position: relative;
+  font-family: var(--display);
+  font-variation-settings: "wdth" 68, "wght" 900;
+  font-weight: 900;
+  font-size: clamp(46px, 10.2vw, 84px);
+  line-height: .84;
+  letter-spacing: -.012em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  padding-bottom: .06em;
+  background: var(--fountain);
+  -webkit-background-clip: text;
+          background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+/* letreiro: a mesma sombra deslocada do nome no hero */
+.tabla__win-word::before {
+  content: attr(data-text);
+  position: absolute; left: .04em; top: .05em; z-index: -1;
+  color: var(--tinta);
+  -webkit-text-fill-color: var(--tinta);
+  background: none;
+}
+
+.tabla__win-text {
+  font-size: clamp(15px, 1.15vw, 17.5px);
+  line-height: 1.45;
+  color: var(--tinta-2);
+  max-width: 28ch;
+}
+.tabla__win .btn { margin-top: 4px; }
+
+/* ------------------------------------------------------------------ celular */
+@media (max-width: 760px) {
+  .tabla__board { max-width: 100%; }
+  .tabla__hint { min-height: 3.2em; }
+  .tabla__win {
+    width: min(400px, calc(100% - 28px));
+    gap: 10px;
+    border-radius: 20px;
+    box-shadow: 0 10px 0 var(--tinta), 0 30px 46px -22px rgba(29, 21, 17, .7);
+  }
+}
+@media (max-width: 420px) {
+  .tbean { width: 56%; }
+  .tabla__win-word { font-size: clamp(44px, 12vw, 58px); }
+}
+
+/* ------------------------------------------------- movimento desligado
+   O jogo inteiro continua: marcar, vencer e resetar. Some só a coreografia. */
+@media (prefers-reduced-motion: reduce) {
+  .motion-ok .tcell.is-win { animation: none; }
+  .tcell, .tcell img, .tabla__hint { transition: none; }
+}
