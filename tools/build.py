@@ -48,9 +48,16 @@ CSS_LAZY = {"deck": "modules/deck.css", "anatomy": "modules/anatomy.css",
 TERSER = os.path.expanduser("~/.npm/_npx/ce069792d930b475/node_modules/.bin/terser")
 
 
+MATH_FN = ("calc", "min", "max", "clamp")
+
+
 def min_css(css: str) -> str:
-    """Minificador conservador: não toca em url(data:...), calc() nem strings."""
+    """Minificador conservador: não toca em url(data:...), strings, nem no
+    miolo de calc()/min()/max()/clamp(), onde `+` e `-` exigem espaço em volta.
+    Sem essa ressalva, `calc(var(--x) + 28px)` virava `calc(var(--x)+28px)`, que
+    é inválido: a propriedade cai pro valor inicial sem avisar ninguém."""
     out, i, n = [], 0, len(css)
+    paren = []                      # um item por parêntese aberto, True se for função matemática
     while i < n:
         c = css[i]
         if c in "\"'":
@@ -68,11 +75,19 @@ def min_css(css: str) -> str:
                 j += 1
             prev = out[-1][-1] if out and out[-1] else ""
             nxt = css[j] if j < n else ""
-            if prev and nxt and (prev not in "{};:,>+~(" and nxt not in "{};:,>+~){"):
+            if any(paren):
+                if prev and nxt and prev != "(" and nxt != ")":
+                    out.append(" ")
+            elif prev and nxt and (prev not in "{};:,>+~(" and nxt not in "{};:,>+~){"):
                 out.append(" ")
             elif prev == ":" and nxt not in "{};,":
                 out.append(" ")  # `and (min-width: X)`, valores compostos
             i = j; continue
+        if c == "(":
+            tail = "".join(out[-8:]).lower()
+            paren.append(any(tail.endswith(f) for f in MATH_FN))
+        elif c == ")" and paren:
+            paren.pop()
         out.append(c); i += 1
     s = "".join(out)
     s = re.sub(r";\s*}", "}", s)
