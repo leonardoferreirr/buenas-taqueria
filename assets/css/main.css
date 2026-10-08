@@ -576,7 +576,10 @@ ul, ol { padding: 0; list-style: none; }
    no letreiro, Boyle Heights desce pra janela e a fila, senão as duas fotos
    viram a mesma parede rosa */
 .place__photo img { object-position: center 45%; }
-[data-place="bh"] .place__photo img { object-position: center 62%; }
+/* paliativo até a fachada própria de Boyle Heights (L1C) existir: a L1B é
+   Highland Park e tem a placa verde da rua escrita no quadro. Descer o corte
+   pra janela tira a placa de cena. */
+[data-place="bh"] .place__photo img { object-position: center 70%; }
 .place__body { padding: clamp(18px, 2vw, 28px); display: grid; gap: 12px; }
 .place__top { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
 .place__name { font-family: var(--display); font-variation-settings: "wdth" 70, "wght" 900; font-weight: 900; font-size: clamp(30px, 3vw, 44px); line-height: .9; text-transform: uppercase; }
