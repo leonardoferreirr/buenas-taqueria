@@ -82,7 +82,7 @@
   /* A lua monta na divisa entre as salsas e a madrugada. Como ela sobe por
      cima de uma seção e desce por cima da outra, as duas precisam saber o
      tamanho dela pra abrir espaço: a arte é 477x586, daí os fatores. */
-  --moon-w: min(38vw, 420px);
+  --moon-w: min(19vw, 210px);
   --moon-rise: calc(var(--moon-w) * 1.228 * .46);   /* o quanto invade as salsas */
   --moon-drop: calc(var(--moon-w) * 1.228 * .54);   /* o quanto desce na madrugada */
   color-scheme: light;
@@ -506,10 +506,10 @@ ul, ol { padding: 0; list-style: none; }
   position: relative; background: var(--noche); color: var(--papel-3);
   padding-top: var(--luna-pad-top); padding-bottom: var(--luna-pad-bottom);
 }
-.luna__sky { position: absolute; inset: 0; overflow: clip; pointer-events: none; }
+.luna__sky { position: absolute; inset: 0; z-index: 1; overflow: clip; pointer-events: none; }
 .luna__sky i { position: absolute; width: var(--sz, 3px); height: var(--sz, 3px); border-radius: 50%; background: var(--maiz); opacity: .7; animation: twinkle var(--tw, 3s) ease-in-out infinite; animation-delay: var(--td, 0s); }
 @keyframes twinkle { 50% { opacity: .15; transform: scale(.6); } }
-.luna__grid { position: relative; display: grid; grid-template-columns: minmax(0, 62%); gap: 40px; align-items: center; }
+.luna__grid { position: relative; z-index: 2; display: grid; grid-template-columns: minmax(0, 62%); gap: 40px; align-items: center; }
 .luna__copy { display: grid; gap: 24px; }
 .luna .lede { color: rgba(251, 245, 234, .8); }
 .neon { color: #FF5FA2; text-shadow: 0 0 6px rgba(255, 95, 162, .9), 0 0 22px rgba(229, 37, 110, .8), 0 0 48px rgba(229, 37, 110, .55); animation: flicker 5.5s infinite; }
@@ -532,16 +532,16 @@ ul, ol { padding: 0; list-style: none; }
   translate: 0 -46%;
 }
 .luna__moon { width: 100%; filter: drop-shadow(0 0 40px rgba(245, 205, 58, .35)); animation: floatA 7s ease-in-out infinite; }
-/* a seção promete que o trompo não dorme; esta faixa é a prova. Sangra de
-   borda a borda porque é a rua de madrugada, não um card. */
+/* a seção promete que o trompo não dorme; a foto é a prova. Entra como fundo,
+   não como faixa: ocupa a seção que já existia em vez de alongá-la. A 80% ela
+   afunda no --noche e o texto continua legível por cima. */
 .luna__photo {
-  position: relative;
-  margin-top: clamp(44px, 5vw, 80px);
-  margin-bottom: calc(var(--luna-pad-bottom) * -1);     /* come o padding da seção: a faixa entrega direto no recorte da próxima */
-  height: clamp(220px, 26vw, 380px);
-  border-radius: 0;
+  position: absolute; inset: 0; z-index: 0;
+  height: auto; border: 0; border-radius: 0; background: none;
+  opacity: .8;
 }
-.luna__photo img { object-position: center 52%; }
+/* o lado esquerdo da foto é o escuro da rua: é onde o texto mora */
+.luna__photo img { object-position: 62% 56%; }
 
 /* ==========================================================================
    La Tabla (base; o módulo joga)
@@ -748,9 +748,13 @@ html.deco-hold .neon,
   .luna__hours { justify-self: center; }
   /* sem coluna pra ocupar, a lua monta na divisa pelo meio e o título abre
      espaço pra descida dela */
-  :root { --moon-w: min(58vw, 260px); }
+  :root { --moon-w: min(29vw, 130px); }
   .luna__art { right: auto; left: 50%; translate: -50% -46%; }
   .luna { --luna-pad-top: calc(var(--moon-drop) + 44px); }
+  /* no desktop o texto mora no canto escuro da foto; aqui ele fica por cima do
+     trompo, então a foto precisa recuar bem mais pra continuar legível */
+  .luna__photo { opacity: .42; }
+  .luna__photo img { object-position: 42% 56%; }
   .tabla__copy { justify-items: center; }
   .quote { grid-template-columns: 1fr 1fr; text-align: left; width: 100%; }
   .quote__submit { justify-self: stretch; }
