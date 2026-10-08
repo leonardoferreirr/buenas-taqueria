@@ -78,6 +78,13 @@
 
   --w-shout: 78;
   --w-shout-open: 126;
+
+  /* A lua monta na divisa entre as salsas e a madrugada. Como ela sobe por
+     cima de uma seção e desce por cima da outra, as duas precisam saber o
+     tamanho dela pra abrir espaço: a arte é 477x586, daí os fatores. */
+  --moon-w: min(38vw, 420px);
+  --moon-rise: calc(var(--moon-w) * 1.228 * .46);   /* o quanto invade as salsas */
+  --moon-drop: calc(var(--moon-w) * 1.228 * .54);   /* o quanto desce na madrugada */
   color-scheme: light;
 }
 
@@ -463,6 +470,8 @@ ul, ol { padding: 0; list-style: none; }
    El Diablito (base; o módulo troca cor e ardência)
    ========================================================================== */
 .salsas { --sec-bg: var(--salsa-bg, var(--verde)); background: var(--salsa-bg, var(--verde)); color: var(--papel-3); padding-block: clamp(72px, 9vw, 130px); transition: background-color .7s var(--ease); }
+/* espaço pra lua: sem isto ela cobre a descrição da salsa e o medidor de ardência */
+.salsas { padding-bottom: calc(var(--moon-rise) + 28px); }
 .salsas.scallop-top::before { transition: background-color .7s var(--ease); }
 .salsas .h2 .hl { color: var(--maiz); }
 .salsas__grid { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: clamp(32px, 5vw, 88px); align-items: center; }
@@ -489,11 +498,18 @@ ul, ol { padding: 0; list-style: none; }
 /* ==========================================================================
    La Luna
    ========================================================================== */
-.luna { position: relative; overflow: clip; background: var(--noche); color: var(--papel-3); padding-block: clamp(80px, 10vw, 150px); }
-.luna__sky { position: absolute; inset: 0; pointer-events: none; }
+/* sem clip na seção: a lua precisa passar por cima da divisa com as salsas.
+   Quem segura as estrelas agora é o próprio céu. */
+.luna {
+  --luna-pad-top: clamp(80px, 10vw, 150px);   /* a lua se pendura por cima dele, então os dois andam juntos */
+  --luna-pad-bottom: clamp(80px, 10vw, 150px);
+  position: relative; background: var(--noche); color: var(--papel-3);
+  padding-top: var(--luna-pad-top); padding-bottom: var(--luna-pad-bottom);
+}
+.luna__sky { position: absolute; inset: 0; overflow: clip; pointer-events: none; }
 .luna__sky i { position: absolute; width: var(--sz, 3px); height: var(--sz, 3px); border-radius: 50%; background: var(--maiz); opacity: .7; animation: twinkle var(--tw, 3s) ease-in-out infinite; animation-delay: var(--td, 0s); }
 @keyframes twinkle { 50% { opacity: .15; transform: scale(.6); } }
-.luna__grid { position: relative; display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, .8fr); gap: 40px; align-items: center; }
+.luna__grid { position: relative; display: grid; grid-template-columns: minmax(0, 62%); gap: 40px; align-items: center; }
 .luna__copy { display: grid; gap: 24px; }
 .luna .lede { color: rgba(251, 245, 234, .8); }
 .neon { color: #FF5FA2; text-shadow: 0 0 6px rgba(255, 95, 162, .9), 0 0 22px rgba(229, 37, 110, .8), 0 0 48px rgba(229, 37, 110, .55); animation: flicker 5.5s infinite; }
@@ -504,10 +520,28 @@ ul, ol { padding: 0; list-style: none; }
 .luna__hours { display: inline-flex; gap: 14px; align-items: baseline; padding: 12px 18px; border: 2px solid rgba(251, 245, 234, .5); border-radius: 999px; justify-self: start; }
 .luna__hours span { opacity: .75; }
 .luna__hours b { font-family: var(--display); font-variation-settings: "wdth" 70, "wght" 850; font-weight: 850; text-transform: uppercase; font-size: 20px; }
-/* block, não grid: com place-items:center o `100%` do filho vira referência
-   cíclica e o navegador resolvia a lua em 155px, um terço do pedido. */
-.luna__art { display: block; }
-.luna__moon { width: min(100%, 470px); margin-inline: auto; filter: drop-shadow(0 0 40px rgba(245, 205, 58, .35)); animation: floatA 7s ease-in-out infinite; }
+/* a lua monta na divisa entre as salsas e a madrugada: metade no fundo que
+   muda de cor com a salsa escolhida, metade no preto. block, não grid: com
+   place-items:center o `100%` do filho vira referência cíclica e o navegador
+   resolvia a lua em 155px, um terço do pedido. */
+.luna__art {
+  display: block; position: absolute; z-index: 3;
+  top: calc(var(--luna-pad-top) * -1);                 /* desfaz o padding da seção: daqui, 0 é a divisa */
+  right: clamp(12px, 5vw, 96px);
+  width: var(--moon-w);
+  translate: 0 -46%;
+}
+.luna__moon { width: 100%; filter: drop-shadow(0 0 40px rgba(245, 205, 58, .35)); animation: floatA 7s ease-in-out infinite; }
+/* a seção promete que o trompo não dorme; esta faixa é a prova. Sangra de
+   borda a borda porque é a rua de madrugada, não um card. */
+.luna__photo {
+  position: relative;
+  margin-top: clamp(44px, 5vw, 80px);
+  margin-bottom: calc(var(--luna-pad-bottom) * -1);     /* come o padding da seção: a faixa entrega direto no recorte da próxima */
+  height: clamp(220px, 26vw, 380px);
+  border-radius: 0;
+}
+.luna__photo img { object-position: center 52%; }
 
 /* ==========================================================================
    La Tabla (base; o módulo joga)
@@ -576,10 +610,8 @@ ul, ol { padding: 0; list-style: none; }
    no letreiro, Boyle Heights desce pra janela e a fila, senão as duas fotos
    viram a mesma parede rosa */
 .place__photo img { object-position: center 45%; }
-/* paliativo até a fachada própria de Boyle Heights (L1C) existir: a L1B é
-   Highland Park e tem a placa verde da rua escrita no quadro. Descer o corte
-   pra janela tira a placa de cena. */
-[data-place="bh"] .place__photo img { object-position: center 70%; }
+/* Boyle Heights é foto de meio-dia e a ação está na metade de baixo do quadro */
+[data-place="bh"] .place__photo img { object-position: center 62%; }
 .place__body { padding: clamp(18px, 2vw, 28px); display: grid; gap: 12px; }
 .place__top { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
 .place__name { font-family: var(--display); font-variation-settings: "wdth" 70, "wght" 900; font-weight: 900; font-size: clamp(30px, 3vw, 44px); line-height: .9; text-transform: uppercase; }
@@ -714,8 +746,11 @@ html.deco-hold .neon,
   .salsas__picker { grid-template-columns: repeat(2, minmax(0, 1fr)); width: 100%; }
   .salsas__detail { flex-direction: column; text-align: center; }
   .luna__hours { justify-self: center; }
-  .luna__art { order: -1; }
-  .luna__moon { width: 58vw; }
+  /* sem coluna pra ocupar, a lua monta na divisa pelo meio e o título abre
+     espaço pra descida dela */
+  :root { --moon-w: min(58vw, 260px); }
+  .luna__art { right: auto; left: 50%; translate: -50% -46%; }
+  .luna { --luna-pad-top: calc(var(--moon-drop) + 44px); }
   .tabla__copy { justify-items: center; }
   .quote { grid-template-columns: 1fr 1fr; text-align: left; width: 100%; }
   .quote__submit { justify-self: stretch; }

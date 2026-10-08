@@ -21,21 +21,10 @@ Originais em `~/Downloads/restaurantes/01-buenas/`, com o código como nome.
 traz as mãos na prensa (o que o prompt L3 pedia) e virou `hands-masa`. O `L3.png`
 ficou com a quesabirria no consomê, que era o conteúdo do prompt L4.
 
-## Falta gerar: L1C, a fachada de Boyle Heights
-
-O card de Boyle Heights usa hoje a `L1B`, que é Highland Park: tem a placa verde
-da rua escrita "HIGHLAND PARK" dentro do quadro. O corte foi descido para 70% pra
-tirar a placa de cena, mas as duas unidades continuam sendo a mesma esquina.
-
-Quando o `L1C.png` existir, é só rodar, sem tocar no HTML:
-
-```
-python3 tools/assets.py photo ~/Downloads/restaurantes/01-buenas/L1C.png assets/img/photos storefront-bh --sizes 600,900,1200
-python3 tools/manifest.py && python3 tools/avif.py
-```
-
-E tirar o `object-position: center 70%` de `[data-place="bh"]` no `main.css`,
-que é paliativo e some junto com a foto velha.
+**L1C é Boyle Heights.** A `L1B` era Highland Park de novo, com a placa verde da
+rua escrita dentro do quadro, dentro do card que diz Boyle Heights. A `L1C` é
+uma esquina própria, de meio-dia, e virou `storefront-bh`. A `L1B` fica no
+acervo, sem uso.
 
 ## Gerados e ainda não usados no site
 
