@@ -33,8 +33,14 @@
   const PART_OF = [-1, -1, 0, 1, 2, 3];           // passo → peça (0 tortilla e 1 trompo são o próprio taco)
   /* pra onde cada peça se recolhe (fração do palco) + giro do recolhimento */
   const TUCK = [[-.04, .03, -34], [.05, .04, 29], [-.03, -.04, 31], [.04, -.03, -27]];
-  /* os dois passos que apontam pro taco: origem e ponta, em fração do raio */
-  const ON_TACO = [{ a: [-.06, .47], b: [-.02, .2] }, { a: [.06, -.45], b: [.02, -.11] }];
+  /* Os dois passos sem peça própria (tortilla e trompo) apontam pro taco. A
+     linha nasce DENTRO dele e termina FORA, igual às outras quatro — antes ela
+     fazia o contrário, e as duas juntas viravam um risco só cortando o taco ao
+     meio na vertical. Saem pelo corredor do meio, em cima e embaixo, que é onde
+     não tem peça. Verticais e jogadas pra lados opostos de propósito: qualquer
+     par que passe perto do centro cai na mesma reta e volta a ler como um risco
+     só rachando o taco, agora na diagonal. */
+  const ON_TACO = [{ a: [-.15, .27], b: [-.15, .45] }, { a: [.13, -.20], b: [.13, -.43] }];
 
   /* easings do token-lock, não curvas soltas:
      --ease      cubic-bezier(.625,.05,0,1)  → CustomEase "buenas" (main.js)

@@ -202,8 +202,11 @@ ul, ol { padding: 0; list-style: none; }
 .slot--photo { aspect-ratio: 4 / 5; }
 .slot--art { width: 100%; height: 100%; border-radius: 4px; }
 .slot--art .slot__label { font-size: 11px; }
-.slot.has-img { border: 0; background: none; }
-.slot img { width: 100%; height: 100%; object-fit: cover; border-radius: inherit; }
+.slot.has-img { border: 0; background: none; overflow: hidden; }
+/* min-height:0 é o que faz o height:100% valer: como grid item a imagem nasce
+   com min-height:auto, o min-content dela vem do aspect-ratio e ela estoura o
+   slot por baixo — foi assim que a foto da unidade cobriu nome e endereço. */
+.slot img { width: 100%; height: 100%; min-width: 0; min-height: 0; object-fit: cover; border-radius: inherit; }
 
 /* selo girando */
 .seal { width: clamp(118px, 11vw, 170px); height: auto; aspect-ratio: 1; overflow: visible; }
@@ -307,9 +310,14 @@ ul, ol { padding: 0; list-style: none; }
   content: attr(data-text); position: absolute; left: .045em; top: .045em; z-index: -1;
   color: var(--tinta); -webkit-text-fill-color: var(--tinta); background: none;
 }
-.wm--back { z-index: 2; }
-.wm--front { z-index: 4; clip-path: inset(52% -4% -6% -4%); pointer-events: none; -webkit-mask-image: linear-gradient(90deg, transparent 38%, #000 48%, #000 76%, transparent 86%); mask-image: linear-gradient(90deg, transparent 38%, #000 48%, #000 76%, transparent 86%); }
-.hero__taco { z-index: 3; width: clamp(240px, 28vw, 450px); transform: translate(27%, 17%) rotate(-5deg); }
+/* O nome é uma peça só, inteira, na frente do taco. A camada que trazia a
+   metade de baixo das letras pra frente do taco cortava todas elas na mesma
+   altura — o taco parecia atravessar a palavra. Fica fora do desenho. */
+.wm--back { z-index: 3; }
+.wm--front { display: none; }
+/* atrás do nome o taco precisa ser maior e mais alto pra continuar lendo como
+   taco: ele aparece por cima do miolo das letras e sai inteiro por baixo */
+.hero__taco { z-index: 2; width: clamp(280px, 36vw, 560px); transform: translate(20%, 12%) rotate(-5deg); }
 .hero__taco img { width: 100%; filter: drop-shadow(0 30px 34px rgba(29, 21, 17, .32)); }
 .orbit { position: absolute; inset: 0; pointer-events: none; }
 .orbit--back { z-index: 1; }
@@ -422,7 +430,6 @@ ul, ol { padding: 0; list-style: none; }
 .anatomy__head { grid-area: head; align-self: center; display: grid; gap: clamp(18px, 2.6vw, 34px); }
 .anatomy__head .h2 { font-size: clamp(38px, 5.6vw, 92px); max-width: 8ch; }
   .anatomy__count { display: none; font-family: var(--slab); font-size: clamp(60px, 9vw, 150px); line-height: .82; color: var(--rosa); font-variant-numeric: tabular-nums; }
-  .anatomy__count small { display: block; font-family: var(--text); font-size: 14px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--tinta-2); margin-top: 10px; }
 .anatomy__stage { grid-area: stage; position: relative; aspect-ratio: 1 / 1; }
 .anatomy__taco { position: absolute; left: 50%; top: 50%; width: 78%; transform: translate(-50%, -50%) rotate(-4deg); filter: var(--shadow-food); }
 .anatomy__part { position: absolute; width: 22%; filter: drop-shadow(0 12px 14px rgba(29, 21, 17, .25)); }
@@ -497,8 +504,10 @@ ul, ol { padding: 0; list-style: none; }
 .luna__hours { display: inline-flex; gap: 14px; align-items: baseline; padding: 12px 18px; border: 2px solid rgba(251, 245, 234, .5); border-radius: 999px; justify-self: start; }
 .luna__hours span { opacity: .75; }
 .luna__hours b { font-family: var(--display); font-variation-settings: "wdth" 70, "wght" 850; font-weight: 850; text-transform: uppercase; font-size: 20px; }
-.luna__art { display: grid; place-items: center; }
-.luna__moon { width: min(100%, 420px); filter: drop-shadow(0 0 40px rgba(245, 205, 58, .35)); animation: floatA 7s ease-in-out infinite; }
+/* block, não grid: com place-items:center o `100%` do filho vira referência
+   cíclica e o navegador resolvia a lua em 155px, um terço do pedido. */
+.luna__art { display: block; }
+.luna__moon { width: min(100%, 470px); margin-inline: auto; filter: drop-shadow(0 0 40px rgba(245, 205, 58, .35)); animation: floatA 7s ease-in-out infinite; }
 
 /* ==========================================================================
    La Tabla (base; o módulo joga)
@@ -555,8 +564,19 @@ ul, ol { padding: 0; list-style: none; }
 .mundo { background: var(--papel); padding-block: clamp(72px, 9vw, 130px); }
 .mundo .h2 { margin-bottom: clamp(36px, 5vw, 64px); }
 .places { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(18px, 2.4vw, 36px); }
-.place { background: var(--papel-3); border: var(--line) solid var(--tinta); border-radius: 22px; box-shadow: 0 8px 0 var(--tinta); overflow: hidden; display: grid; }
-.place__photo { aspect-ratio: 16 / 9; border-radius: 0; border: 0; border-bottom: var(--line) solid var(--tinta); }
+.place { background: var(--papel-3); border: var(--line) solid var(--tinta); border-radius: 22px; box-shadow: 0 8px 0 var(--tinta); overflow: hidden; display: grid; grid-template-columns: minmax(0, 1fr); }
+/* min-width:0 é obrigatório: com aspect-ratio e min-width:auto a foto derivava
+   o min-content da altura e estourava a coluna do card (993px num card de 638),
+   e o overflow:hidden comia um terço da foto e do texto. */
+.place > * { min-width: 0; }
+/* faixa horizontal baixa, não painel: o card é a ficha da unidade, a foto é o
+   cabeçalho dela */
+.place__photo { aspect-ratio: auto; height: clamp(140px, 13vw, 190px); border-radius: 0; border: 0; border-bottom: var(--line) solid var(--tinta); }
+/* na faixa baixa o corte decide o que cada unidade mostra: Highland Park fica
+   no letreiro, Boyle Heights desce pra janela e a fila, senão as duas fotos
+   viram a mesma parede rosa */
+.place__photo img { object-position: center 45%; }
+[data-place="bh"] .place__photo img { object-position: center 62%; }
 .place__body { padding: clamp(18px, 2vw, 28px); display: grid; gap: 12px; }
 .place__top { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
 .place__name { font-family: var(--display); font-variation-settings: "wdth" 70, "wght" 900; font-weight: 900; font-size: clamp(30px, 3vw, 44px); line-height: .9; text-transform: uppercase; }
@@ -662,7 +682,6 @@ html.deco-hold .neon,
   .hero__stage { height: 96vw; margin-top: 2px; }
   .hero__taco { width: 55vw; transform: translate(15%, 31%) rotate(-4deg); }
   .wm { top: 36%; }
-  .wm--front { clip-path: inset(56% -6% -8% -6%); }
   .orbit__item { width: calc(var(--s) * .78); }
   .hero__foot { grid-template-columns: 1fr; justify-items: center; padding-top: 18px; }
   .hero__copy { justify-items: center; }
