@@ -5,7 +5,7 @@ import os, glob
 from PIL import Image
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-TARGETS = ["assets/img/cards/*.webp", "assets/img/food/taco-pastor-*.webp", "assets/img/food/ing-*.webp"]
+TARGETS = ["assets/img/cards/*.webp", "assets/img/food/taco-pastor-*.webp", "assets/img/food/ing-*.webp", "assets/img/photos/*.webp"]
 Q = 46
 
 total_w = total_a = 0

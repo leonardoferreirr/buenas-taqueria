@@ -1,34 +1,41 @@
 # Imagens do ¡Buenas! — o que já tem e o que falta
 
 Prompts com botão de copiar: https://claude.ai/artifact/2FHVfoeue97EM1nw6X6wNu
-Salvar o original em `~/Downloads/restaurantes/01-buenas/` com o código como nome (`C4.png`, `L1.png`…).
+Originais em `~/Downloads/restaurantes/01-buenas/`, com o código como nome.
 
-## Já processado
+## Tudo processado (20 de 20 códigos gerados em 2026-10-08)
+
 | Código | Vira | Onde aparece |
 |---|---|---|
-| C0 | `cards/el-pastor-*` | baralho, abertura, leque do topo |
-| C1 | `cards/la-birria-*`, `el-cazo-*`, `la-asada-*` | baralho |
-| C2 | `cards/el-nopal-*`, `el-camaron-*`, `el-gallo-*` | baralho |
-| C3 | `cards/la-sandia-*`, `la-luna-*`, `la-estrella-*` | baralho, La Luna, avaliações |
-| H1 | `food/taco-pastor-*` | topo e anatomia |
-| I1A–H | `food/ing-*` | órbita do topo, anatomia, versos, ardência |
+| C0–C3 | `cards/el-pastor-*`, `la-birria-*`, `el-cazo-*`, `la-asada-*`, `el-nopal-*`, `el-camaron-*`, `el-gallo-*`, `la-sandia-*`, `la-luna-*`, `la-estrella-*` | baralho, abertura, leque, La Luna, avaliações |
+| C4 | `cards/el-diablito-*` | carta grande das salsas |
+| C5 | `cards/la-mano-*` | carta grande da tortilla |
+| H1 | `food/taco-pastor-*` | hero e anatomia |
+| I1A–H | `food/ing-*` | órbita do hero, anatomia, versos |
+| L1A (16:9) | `photos/storefront-hp-*` | El Mundo, Highland Park |
+| L1B (4:5) | `photos/storefront-bh-*` | El Mundo, Boyle Heights |
+| L4 | `photos/hands-masa-*` | La Mano |
+| L5 | `photos/catering-*` | El Cazo |
 
-## Falta (o site já está preparado: a imagem aparece sozinha ao ser processada)
-| Código | Comando | Vira |
-|---|---|---|
-| C4 | `python3 tools/assets.py cards ~/Downloads/restaurantes/01-buenas/C4.png assets/img/cards el-diablito` | carta grande das salsas |
-| C5 | `python3 tools/assets.py cards ~/Downloads/restaurantes/01-buenas/C5.png assets/img/cards la-mano` | carta grande da tortilla |
-| L1 | `python3 tools/assets.py photo ~/Downloads/restaurantes/01-buenas/L1.png assets/img/photos storefront-hp` | fachada Highland Park |
-| L1 (4:5 ou 2ª geração) | `... assets/img/photos storefront-bh` | fachada Boyle Heights |
-| L3 | `python3 tools/assets.py photo ~/Downloads/restaurantes/01-buenas/L3.png assets/img/photos hands-masa` | La Mano |
-| L5 | `python3 tools/assets.py photo ~/Downloads/restaurantes/01-buenas/L5.png assets/img/photos catering` | El Cazo |
+**Atenção ao nome:** na geração, L3 e L4 trocaram de conteúdo. O `L4.png` é que
+traz as mãos na prensa (o que o prompt L3 pedia) e virou `hands-masa`. O `L3.png`
+ficou com a quesabirria no consomê, que era o conteúdo do prompt L4.
 
-Opcionais, que enriquecem mas não travam nada: **D1–D3** (pratos reais no verso das cartas, hoje os versos mostram os ingredientes), **L2** (taquero à noite, para a La Luna), **L4** (mão com quesabirria, para as avaliações), **T1** (textura de parede rosa).
-**I2 e I3 não são mais necessários**: a anatomia usa o taco do H1 com os ingredientes do I1.
+## Gerados e ainda não usados no site
+
+`S1A–D` (as 4 salsas em tigela, vistas de cima), `D1A–D3C` (9 pratos reais para
+os versos das cartas), `L2A/L2B` (taquero à noite, para a La Luna), `L3` (a
+quesabirria, para as avaliações), `I2`/`I3`, `T1` (textura de parede).
+Entram quando houver um lugar que ganhe com eles; nada no site depende deles.
 
 ## Regras do recorte
+
 - `cards`: arte em fundo creme. O creme de fora sai por flood fill a partir das bordas (o creme de dentro, como olhos e brilhos, fica), come 1px para matar o halo e descontamina a borda.
 - `cutout`: PNG que já veio transparente do ChatGPT. Só apara e exporta.
 - `split`: uma folha transparente com vários itens lado a lado.
 - `photo`: foto normal, sem alfa.
 Os PNGs mestres ficam em `raw/processed/` (fora do git).
+
+Depois de processar: `python3 tools/manifest.py` e `python3 tools/avif.py`.
+O AVIF cobre `cards/`, `food/taco-pastor-*`, `food/ing-*` e `photos/`, e pesa cerca
+de 45% menos que o WebP.

@@ -131,3 +131,8 @@
   .anatomy__steps li::before { transition: none !important; opacity: 1 !important; transform: none !important; }
   .anatomy__lines { display: none; }
 }
+
+/* contador do passo: so no modo preso, onde ha espaco na coluna do titulo */
+@media (min-width: 761px) {
+  .motion-ok .anatomy.is-pinned .anatomy__count { display: block; }
+}

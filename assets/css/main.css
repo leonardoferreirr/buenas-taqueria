@@ -308,8 +308,8 @@ ul, ol { padding: 0; list-style: none; }
   color: var(--tinta); -webkit-text-fill-color: var(--tinta); background: none;
 }
 .wm--back { z-index: 2; }
-.wm--front { z-index: 4; clip-path: inset(56% -4% -6% -4%); pointer-events: none; }
-.hero__taco { z-index: 3; width: clamp(250px, 31vw, 500px); transform: translate(16%, 9%) rotate(-4deg); }
+.wm--front { z-index: 4; clip-path: inset(52% -4% -6% -4%); pointer-events: none; -webkit-mask-image: linear-gradient(90deg, transparent 38%, #000 48%, #000 76%, transparent 86%); mask-image: linear-gradient(90deg, transparent 38%, #000 48%, #000 76%, transparent 86%); }
+.hero__taco { z-index: 3; width: clamp(240px, 28vw, 450px); transform: translate(27%, 17%) rotate(-5deg); }
 .hero__taco img { width: 100%; filter: drop-shadow(0 30px 34px rgba(29, 21, 17, .32)); }
 .orbit { position: absolute; inset: 0; pointer-events: none; }
 .orbit--back { z-index: 1; }
@@ -419,8 +419,10 @@ ul, ol { padding: 0; list-style: none; }
    ========================================================================== */
 .anatomy { background: var(--papel); padding-block: clamp(64px, 8vw, 120px); }
 .anatomy__grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr) minmax(0, .9fr); grid-template-areas: "head stage steps"; gap: 32px; align-items: center; }
-.anatomy__head { grid-area: head; align-self: start; }
-.anatomy__head .h2 { font-size: clamp(34px, 4.3vw, 66px); max-width: 9ch; }
+.anatomy__head { grid-area: head; align-self: center; display: grid; gap: clamp(18px, 2.6vw, 34px); }
+.anatomy__head .h2 { font-size: clamp(38px, 5.6vw, 92px); max-width: 8ch; }
+  .anatomy__count { display: none; font-family: var(--slab); font-size: clamp(60px, 9vw, 150px); line-height: .82; color: var(--rosa); font-variant-numeric: tabular-nums; }
+  .anatomy__count small { display: block; font-family: var(--text); font-size: 14px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--tinta-2); margin-top: 10px; }
 .anatomy__stage { grid-area: stage; position: relative; aspect-ratio: 1 / 1; }
 .anatomy__taco { position: absolute; left: 50%; top: 50%; width: 78%; transform: translate(-50%, -50%) rotate(-4deg); filter: var(--shadow-food); }
 .anatomy__part { position: absolute; width: 22%; filter: drop-shadow(0 12px 14px rgba(29, 21, 17, .25)); }
@@ -699,7 +701,7 @@ html.deco-hold .neon,
   .estrella .h2 { margin-inline: auto; }
   .places { grid-template-columns: 1fr; }
   .place__ctas .btn { flex: 1; }
-  .footer__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .footer__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px 12px; }
   .footer__seal { grid-column: 1 / -1; justify-self: center; }
   .dock {
     display: grid; grid-template-columns: 1.3fr 1fr; gap: 10px;

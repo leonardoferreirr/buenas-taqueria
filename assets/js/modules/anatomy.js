@@ -19,6 +19,7 @@
   const stage = section.querySelector("[data-anatomy-stage]");
   const svg = section.querySelector("[data-anatomy-lines]");
   const list = section.querySelector("[data-anatomy-steps]");
+  const countEl = section.querySelector("[data-anatomy-n]");
   const taco = section.querySelector(".anatomy__taco");
   const parts = [...section.querySelectorAll(".anatomy__part")];
   const items = list ? [...list.children] : [];
@@ -162,9 +163,10 @@
     if (s === active) return;
     active = s;
     for (let i = 0; i < items.length; i++) items[i].classList.toggle("is-on", i === s);
+    if (countEl) countEl.textContent = String(s + 1).padStart(2, "0");
     drawLeader(s);
   }
-  const track = (self) => setActive(Math.min(STEPS - 1, Math.max(0, Math.floor(self.progress * SPAN + .35))));
+  const track = (self) => setActive(Math.min(STEPS - 1, Math.max(0, Math.floor(self.progress * SPAN))));
 
   /* ---------------------------------------------------------------- coreografia
      Valores de origem são funções: com invalidateOnRefresh o GSAP relê a medida
@@ -182,7 +184,7 @@
         tl.fromTo(parts[p],
           {
             x: () => geo.part[p].dx, y: () => geo.part[p].dy,
-            rotation: () => geo.part[p].spin, scale: .28, opacity: .45,
+            rotation: () => geo.part[p].spin, scale: .28, opacity: 0,
           },
           { x: 0, y: 0, rotation: 0, scale: 1, opacity: 1, duration: .95, ease: E.back }, s);
       }
@@ -219,7 +221,7 @@
       scrollTrigger: {
         trigger: pinEl,
         start: "top top",
-        end: () => "+=" + Math.round(innerHeight * 1.8),
+        end: () => "+=" + Math.round(innerHeight * 2.3),
         pin: pinEl,
         pinSpacing: true,
         anticipatePin: 1,

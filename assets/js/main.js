@@ -312,23 +312,51 @@
       .then((have) => slots.forEach((slot) => { if (have.includes(slot.getAttribute("data-src"))) fillSlot(slot, have); }))
       .catch(() => {});
   }
+  /* o navegador aceita AVIF? decidido uma vez, usado por todos os slots */
+  Buenas.avif = false;
+  (() => {
+    const t = new Image();
+    t.onload = () => { Buenas.avif = t.width === 1; };
+    t.src = "data:image/avif;base64,AAAAIGZ0eXBhdmlmAAAAAGF2aWZtaWYxbWlhZk1BMUIAAADybWV0YQAAAAAAAAAoaGRscgAAAAAAAAAAcGljdAAAAAAAAAAAAAAAAGxpYmF2aWYAAAAADnBpdG0AAAAAAAEAAAAeaWxvYwAAAABEAAABAAEAAAABAAABGgAAAB0AAAAoaWluZgAAAAAAAQAAABppbmZlAgAAAAABAABhdjAxQ29sb3IAAAAAamlwcnAAAABLaXBjbwAAABRpc3BlAAAAAAAAAAEAAAABAAAAEHBpeGkAAAAAAwgICAAAAAxhdjFDgQ0MAAAAABNjb2xybmNseAACAAIABoAAAAAXaXBtYQAAAAAAAAABAAEEAQKDBAAAACVtZGF0EgAKCBgANogQEAwgMg8f8D///8WfhwB8+ErK42A=";
+  })();
+
+  /* Carrega a imagem do slot assim que o manifesto confirma que ela existe.
+     Sem loading="lazy" e sem observer: numa imagem criada por script o
+     navegador decide adiar no instante em que o src é atribuído e não
+     reavalia depois, então ela nunca carregava — nem dentro da viewport.
+     São seis fotos e o manifesto já garantiu que todas existem; carregar
+     direto é o caminho que não quebra. */
   function fillSlot(slot, have) {
     const src = slot.getAttribute("data-src");
     const img = new Image();
     img.decoding = "async";
-    img.loading = "lazy";
     img.alt = slot.getAttribute("data-alt") || "";
     if (slot.hasAttribute("data-contain")) img.style.objectFit = "contain";
-    img.onload = () => {
+
+    const rotulo = slot.innerHTML;
+
+    img.addEventListener("load", () => {
       slot.classList.add("has-img");
       slot.innerHTML = "";
       slot.appendChild(img);
       window.Buenas?.refreshSoon?.();
+    }, { once: true });
+    img.addEventListener("error", () => {
+      slot.innerHTML = rotulo;
+      slot.classList.remove("has-img");
+    }, { once: true });
+
+    /* prefere AVIF quando existir: pesa cerca de 45% menos que o WebP */
+    const avif = (u) => {
+      const a = u.replace(/\.webp$/, ".avif");
+      return (Buenas.avif && have.includes(a)) ? a : u;
     };
     const ss = (slot.getAttribute("data-srcset") || "")
-      .split(",").map((s) => s.trim()).filter((s) => have.includes(s.split(/\s+/)[0])).join(", ");
-    if (ss) { img.srcset = ss; img.sizes = slot.getAttribute("data-sizes") || "100vw"; }
-    img.src = src;
+      .split(",").map((s) => s.trim()).filter(Boolean)
+      .map((par) => { const b = par.split(/\s+/); return have.includes(b[0]) ? [avif(b[0])].concat(b.slice(1)).join(" ") : null; })
+      .filter(Boolean).join(", ");
+    if (ss) { img.sizes = slot.getAttribute("data-sizes") || "100vw"; img.srcset = ss; }
+    img.src = avif(src);
   }
 
   /* ---------------------------------------------------------------- enfeite:
